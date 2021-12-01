@@ -61,7 +61,7 @@
                       <div class="form-group">
                         <label for="no_ref">No. Reff</label>
                         <p><?= form_error('no_reff') ?></p>
-                        <input type="text" name="no_reff" class="form-control mb-3" id="no_reff" value="<?= $data->no_reff ?>">
+                        <input type="text" name="no_reff" class="form-control mb-3" id="no_reff" value="<?= $data->no_reff ?>" <?php if($title=='Edit'){echo "readonly";} ?>>
                       </div>
                       <div class="form-group">
                         <label for="nama">Nama Reff</label>

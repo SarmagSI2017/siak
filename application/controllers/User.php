@@ -57,6 +57,7 @@ class User extends CI_Controller{
 
     public function isNoAkunThere($str){
         $noAkun = $this->akun->countAkunByNoReff($str);
+
         if($noAkun >= 1){
             $this->form_validation->set_message('isNoAkunThere', 'No.Reff Sudah Ada');
             return false;
@@ -77,7 +78,7 @@ class User extends CI_Controller{
             $data->id_user = $this->session->userdata('id');
         }
 
-        if(!$this->akun->validate()){
+        if(!$this->akun->validate($title)){
             $this->load->view('template',compact('content','title','action','data','titleTag'));
             return;
         }
@@ -100,7 +101,7 @@ class User extends CI_Controller{
             $data->id_user = $this->session->userdata('id');
         }
 
-        if(!$this->akun->validate()){
+        if(!$this->akun->validate($title)){
             $this->load->view('template',compact('content','title','action','data','titleTag'));
             return;
         }
@@ -113,7 +114,7 @@ class User extends CI_Controller{
     public function deleteAkun(){
         $id = $this->input->post('id',true);
         $noReffTransaksi = $this->jurnal->countJurnalNoReff($id);
-        if($noReffTransaksi >= 0 ){
+        if($noReffTransaksi > 0 ){
             $this->session->set_flashdata('dataNull','No.Reff '.$id.' Tidak Bisa Di Hapus Karena Data Akun Ada Di Jurnal Umum');
             redirect('data_akun');
         }

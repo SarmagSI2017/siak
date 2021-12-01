@@ -1,5 +1,11 @@
 {
-	"require": {
-		"dompdf/dompdf": "^0.8.3"
-	}
+    "name": "adity/siak",
+    "require": {
+        "dompdf/dompdf": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adity\\Siak\\": "src/"
+        }
+    }
 }

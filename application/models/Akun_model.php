@@ -52,28 +52,46 @@ class Akun_model extends CI_Model{
         ];
     }
 
-    public function getValidationRules(){
-        return [
-            [
-                'field'=>'no_reff',
-                'label'=>'No.Reff',
-                'rules'=>'trim|required|numeric|callback_isNoAkunThere'
-            ],
-            [
-                'field'=>'nama_reff',
-                'label'=>'Nama Reff',
-                'rules'=>'trim|required|callback_isNamaAkunThere'
-            ],
-            [
-                'field'=>'keterangan',
-                'label'=>'Keterangan',
-                'rules'=>'trim|required'
-            ],
-        ];
+    public function getValidationRules($type){
+        if($type == 'Edit')
+        {
+            return [
+                [
+                    'field'=>'nama_reff',
+                    'label'=>'Nama Reff',
+                    'rules'=>'trim|required|callback_isNamaAkunThere'
+                ],
+                [
+                    'field'=>'keterangan',
+                    'label'=>'Keterangan',
+                    'rules'=>'trim|required'
+                ],
+            ];
+        }
+        else
+        {
+            return [
+                [
+                    'field'=>'no_reff',
+                    'label'=>'No.Reff',
+                    'rules'=>'trim|required|numeric|callback_isNoAkunThere'
+                ],
+                [
+                    'field'=>'nama_reff',
+                    'label'=>'Nama Reff',
+                    'rules'=>'trim|required|callback_isNamaAkunThere'
+                ],
+                [
+                    'field'=>'keterangan',
+                    'label'=>'Keterangan',
+                    'rules'=>'trim|required'
+                ],
+            ];
+        }
     }
 
-    public function validate(){
-        $rules = $this->getValidationRules();
+    public function validate($type){
+        $rules = $this->getValidationRules($type);
         $this->form_validation->set_rules($rules);
         $this->form_validation->set_error_delimiters('<span class="text-danger" style="font-size:14px">','</span>');
         return $this->form_validation->run();
