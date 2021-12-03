@@ -349,6 +349,14 @@ class User extends CI_Controller{
         $this->pdf->load_view('user/laporan', $data);
     }
 
+    public function laporanlr(){
+        $titleTag = 'laporan_lr';
+        $content = 'user/laporan_lr';
+        $listJurnal = $this->jurnal->getJurnalByYearAndMonth();
+        $tahun = $this->jurnal->getJurnalByYear();
+        $this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
+    }
+
     public function logout(){
         $this->user->logout();
         redirect('');
