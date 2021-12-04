@@ -104,6 +104,11 @@
             <i class="fas fa-file-pdf text-red"></i>Laporan
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('user/laporanlr') ?>">
+            <i class="fas fa-file-alt text-yellow"></i>Laporan laba rugi
+            </a>
+          </li>
         </ul>
       </div>
     </div>
