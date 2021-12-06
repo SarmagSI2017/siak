@@ -105,7 +105,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user/laporanlr') ?>">
+            <a class="nav-link" href="<?= base_url('laporanlaru') ?>">
             <i class="fas fa-file-alt text-yellow"></i>Laporan laba rugi
             </a>
           </li>

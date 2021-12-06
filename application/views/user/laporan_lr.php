@@ -108,7 +108,7 @@
                     <td scope="col"><?=$i?></td>
                     <td scope="col"><?= bulan($bulan).' '.$tahun ?></td>
                     <td scope="col">
-                        <?= form_open('laporan_lr/detail','',['bulan'=>$bulan,'tahun'=>$tahun]) ?>
+                        <?= form_open('laporanlr/detail','',['bulan'=>$bulan,'tahun'=>$tahun]) ?>
                         <?= form_button(['type'=>'submit','content'=>'Lihat Laporan laba rugi','class'=>'btn btn-success mr-3']) ?>
                         <?= form_close() ?>
                     </td>

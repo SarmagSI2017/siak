@@ -86,3 +86,9 @@ $route['laporan/cetak'] = 'user/laporanCetak';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// Laporna Laba rugi
+
+$route['laporanlaru'] = 'user/laporanlr';
+$route['laporanlr/detail'] = 'user/laporanlrDetail';
