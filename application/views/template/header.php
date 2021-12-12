@@ -109,6 +109,11 @@
             <i class="fas fa-file-alt text-yellow"></i>Laporan laba rugi
             </a>
           </li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?= base_url('laporan_pk') ?>">
+					<i class="fas fa-file-alt text-yellow"></i>Laporan Posisi Keuangan
+				</a>
+			</li>
         </ul>
       </div>
     </div>

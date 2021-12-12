@@ -387,6 +387,56 @@ class User extends CI_Controller{
         $this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
     }
 
+	/*
+	 * Start Laporan Posisi Keuangan Section
+	 * */
+	/**
+	 * Function to Render Laporan Posisi Keuangan Template
+	 * @return void
+	 */
+	public function laporan_pk() {
+		$titleTag = 'laporan_pk';
+		$content = 'user/laporan_pk';
+		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
+		$tahun = $this->jurnal->getJurnalByYear();
+		$this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
+	}
+
+	public function laporanPKDetail() {
+		$content = 'user/laporan_pk_detail';
+		$titleTag = 'Laporan Posisi Keuangan';
+
+		$bulan = $this->input->post('bulan',true);
+		$tahun = $this->input->post('tahun',true);
+
+		if(empty($bulan) || empty($tahun)){
+			redirect('laporan_pk');
+		}
+
+		$dataAkun = $this->akun->getAkunPKByMonthYear($bulan,$tahun);
+		$data = null;
+		$saldo = null;
+
+		foreach($dataAkun as $row){
+			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
+			$saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
+		}
+
+		if($data == null || $saldo == null){
+			$this->session->set_flashdata('dataNull','Laporan Posisi Keuangan pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+			redirect('laporan_pk');
+		}
+
+		$jumlah = count($data);
+
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+
+	}
+
+	/*
+	 * End Laporan Posisi Keuangan Section
+	 * */
+
     public function logout(){
         $this->user->logout();
         redirect('');

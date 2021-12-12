@@ -92,3 +92,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['laporanlaru'] = 'user/laporanlr';
 $route['laporanlr/detail'] = 'user/laporanlrDetail';
+
+// Laporan Posisi Keuangan
+$route['laporan_pk'] = 'user/laporan_pk';
+$route['laporan_pk/detail'] = 'user/laporanPKDetail';
