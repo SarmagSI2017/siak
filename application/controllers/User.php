@@ -349,44 +349,6 @@ class User extends CI_Controller{
         $this->pdf->load_view('user/laporan', $data);
     }
 
-    public function laporanlr(){
-        $titleTag = 'laporan_lr';
-        $content = 'user/laporan_lr';
-        $listJurnal = $this->jurnal->getJurnalByYearAndMonth();
-        $tahun = $this->jurnal->getJurnalByYear();
-        $this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
-    }
-
-    public function laporanLrDetail(){
-        $content = 'user/laporanlr_detail';
-        $titleTag = 'Laporan Laba Rugi';
-
-        $bulan = $this->input->post('bulan',true);
-        $tahun = $this->input->post('tahun',true);
-
-        if(empty($bulan) || empty($tahun)){
-            redirect('laporan_lr');
-        }
-
-        $dataAkun = $this->akun->getAkunByMonthYear($bulan,$tahun);
-        $data = null;
-        $saldo = null;
-        
-        foreach($dataAkun as $row){
-            $data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
-            $saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
-        }
-
-        if($data == null || $saldo == null){
-            $this->session->set_flashdata('dataNull','Neraca Saldo Dengan Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
-            redirect('laporan_lr');
-        }
-
-        $jumlah = count($data);
-
-        $this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
-    }
-
 	/*
 	 * Start Laporan Posisi Keuangan Section
 	 * */
