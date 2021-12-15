@@ -407,7 +407,7 @@ class User extends CI_Controller{
 	 * @return void
 	 */
 	public function laporan_laru() {
-		$titleTag = 'laporan_laru';
+		$titleTag = 'Laporan Laba Rugi';
 		$content = 'user/laporan_laru';
 		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
 		$tahun = $this->jurnal->getJurnalByYear();
@@ -416,10 +416,11 @@ class User extends CI_Controller{
 
 	public function laporan_laru_detail() {
 		$content = 'user/laporan_laru_detail';
-		$titleTag = 'Laporan Laba Rugi';
 
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
+
+		$titleTag = 'Laporan Laba Rugi |'.$bulan.'-'.$tahun;
 
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_laru');
