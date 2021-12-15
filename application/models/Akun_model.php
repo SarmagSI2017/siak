@@ -65,6 +65,28 @@ class Akun_model extends CI_Model{
 			->result();
 	}
 
+    /*
+	 * Laporan Posisi Keuangan Section
+	 * */
+	/**
+	 * @param $bulan
+	 * @param $tahun
+	 * @return mixed
+	 */
+	public function getAkunLRByMonthYear($bulan,$tahun){
+		return $this->db->select('akun.no_reff,akun.nama_reff,akun.keterangan,transaksi.tgl_transaksi')
+			->from($this->table)
+			->where('month(transaksi.tgl_transaksi)',$bulan)
+			->where('year(transaksi.tgl_transaksi)',$tahun)
+			->where('transaksi.no_reff>',400)
+            ->where('transaksi.no_reff<',600)
+			->join('transaksi','transaksi.no_reff = akun.no_reff')
+			->group_by('akun.nama_reff')
+			->order_by('akun.no_reff')
+			->get()
+			->result();
+	}
+
     public function getDefaultValues(){
         return [
             'no_reff'=>'',
@@ -110,6 +132,8 @@ class Akun_model extends CI_Model{
             ];
         }
     }
+
+    
 
     public function validate($type){
         $rules = $this->getValidationRules($type);

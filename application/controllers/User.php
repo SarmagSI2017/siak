@@ -399,6 +399,56 @@ class User extends CI_Controller{
 	 * End Laporan Posisi Keuangan Section
 	 * */
 
+    /*
+	 * Start Laporan LabaRugi Section
+	 * */
+	/**
+	 * Function to Render Laporan LabaRugi Template
+	 * @return void
+	 */
+	public function laporan_laru() {
+		$titleTag = 'laporan_laru';
+		$content = 'user/laporan_laru';
+		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
+		$tahun = $this->jurnal->getJurnalByYear();
+		$this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
+	}
+
+	public function laporan_laru_detail() {
+		$content = 'user/laporan_laru_detail';
+		$titleTag = 'Laporan Laba Rugi';
+
+		$bulan = $this->input->post('bulan',true);
+		$tahun = $this->input->post('tahun',true);
+
+		if(empty($bulan) || empty($tahun)){
+			redirect('laporan_laru');
+		}
+
+		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
+		$data = null;
+		$saldo = null;
+
+		foreach($dataAkun as $row){
+			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
+			$saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
+		}
+
+		if($data == null || $saldo == null){
+			$this->session->set_flashdata('dataNull','Laporan Laba Rugi pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+			redirect('laporan_laru');
+		}
+
+		$jumlah = count($data);
+
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+
+	}
+
+	/*
+	 * End Laporan LabaRugi Section
+	 * */
+
     public function logout(){
         $this->user->logout();
         redirect('');
