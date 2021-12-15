@@ -1,3 +1,9 @@
+<!-- 
+	TODO : 
+	- Cek perhitungannya sudah bener apa belum
+	- Tombol untuk print ke PDF
+-->
+
 <!-- Main content -->
 <div class="main-content">
 	<!-- Top navbar -->
