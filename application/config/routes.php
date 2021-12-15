@@ -87,7 +87,7 @@ $route['laporan/cetak'] = 'user/laporanCetak';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Laporan Posisi Keuangan
+// Laporan Laba Rugi
 $route['laporan_laru'] = 'user/laporan_laru';
 $route['laporan_laru/detail'] = 'user/laporan_laru_detail';
 
