@@ -88,8 +88,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // Laporan Laba Rugi
-$route['laporan_laru'] = 'user/laporan_laru';
-$route['laporan_laru/detail'] = 'user/laporan_laru_detail';
+$route['laporan_kompre'] = 'user/laporan_kompre';
+$route['laporan_kompre/detail'] = 'user/laporan_kompre_detail';
 
 // Laporan Posisi Keuangan
 $route['laporan_pk'] = 'user/laporan_pk';

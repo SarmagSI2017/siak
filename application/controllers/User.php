@@ -406,16 +406,16 @@ class User extends CI_Controller{
 	 * Function to Render Laporan LabaRugi Template
 	 * @return void
 	 */
-	public function laporan_laru() {
+	public function laporan_kompre() {
 		$titleTag = 'Laporan Laba Rugi';
-		$content = 'user/laporan_laru';
+		$content = 'user/laporan_kompre';
 		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
 		$tahun = $this->jurnal->getJurnalByYear();
 		$this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
 	}
 
-	public function laporan_laru_detail() {
-		$content = 'user/laporan_laru_detail';
+	public function laporan_kompre_detail() {
+		$content = 'user/laporan_kompre_detail';
 
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
@@ -423,7 +423,7 @@ class User extends CI_Controller{
 		$titleTag = 'Laporan Laba Rugi |'.$bulan.'-'.$tahun;
 
 		if(empty($bulan) || empty($tahun)){
-			redirect('laporan_laru');
+			redirect('laporan_kompre');
 		}
 
 		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
@@ -437,7 +437,7 @@ class User extends CI_Controller{
 
 		if($data == null || $saldo == null){
 			$this->session->set_flashdata('dataNull','Laporan Laba Rugi pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
-			redirect('laporan_laru');
+			redirect('laporan_kompre');
 		}
 
 		$jumlah = count($data);
