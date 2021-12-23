@@ -90,6 +90,11 @@
                           <?= form_error('saldo') ?>
                         </div>
                         <div class="col">
+                          <label for="keterangan">Keterangan</label>
+                          <input type="text" name="keterangan" class="form-control saldo" id="keterangan" value="">
+                          <?= form_error('saldo') ?>
+                        </div>
+                        <div class="col">
                           <label for="addon" class="mb-5"> </label>
                           <button class="btn btn-success mt-3 add-more" type="button">
                             <i class="glyphicon glyphicon-plus"></i> Add
@@ -110,33 +115,38 @@
                     if (!empty($id)) :
                     ?>
                       <input type="hidden" name="id" value="<?= $id ?>">
-                    <?php endif; ?>
-                    <div class="row mb-4">
-                      <div class="col">
-                        <label for="no_reff">Nama Akun</label>
-                        <?= form_dropdown('no_reff', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
-                        <?= form_error('no_reff') ?>
+                      <?php endif; ?>
+                      <div class="row mb-4">
+                        <div class="col">
+                          <label for="no_reff">Nama Akun</label>
+                          <?= form_dropdown('no_reff', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
+                          <?= form_error('no_reff') ?>
+                        </div>
+                        <div class="col">
+                          <label for="reff">No. Reff</label>
+                          <input type="text" name="reff" class="form-control" id="reff" readonly>
+                        </div>
+                        <div class="col">
+                          <label for="jenis_saldo">Jenis Saldo</label>
+                          <?= form_dropdown('jenis_saldo', ['debit' => 'Debit', 'kredit' => 'Kredit'], $data->jenis_saldo, ['class' => 'form-control jenis_saldo', 'id' => 'jenis_saldo']); ?>
+                          <?= form_error('jenis_saldo') ?>
+                        </div>
+                        <div class="col">
+                          <label for="saldo">Saldo</label>
+                          <input type="text" name="saldo" class="form-control saldo" id="saldo" value="<?= $data->saldo ?>">
+                          <?= form_error('saldo') ?>
+                        </div>
+                        <div class="col">
+                          <label for="keterangan">Keterangan</label>
+                          <input type="text" name="keterangan" class="form-control saldo" id="keterangan" value="">
+                          <?= form_error('saldo') ?>
+                        </div>
+                        <div class="col">
+                          <label for="addon" class="mb-5"> </label>
+                          <button class="btn btn-danger mt-3 remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                        </div>
                       </div>
-                      <div class="col">
-                        <label for="reff">No. Reff</label>
-                        <input type="text" name="reff" class="form-control" id="reff" readonly>
-                      </div>
-                      <div class="col">
-                        <label for="jenis_saldo">Jenis Saldo</label>
-                        <?= form_dropdown('jenis_saldo', ['debit' => 'Debit', 'kredit' => 'Kredit'], $data->jenis_saldo, ['class' => 'form-control jenis_saldo', 'id' => 'jenis_saldo']); ?>
-                        <?= form_error('jenis_saldo') ?>
-                      </div>
-                      <div class="col">
-                        <label for="saldo">Saldo</label>
-                        <input type="text" name="saldo" class="form-control saldo" id="saldo" value="<?= $data->saldo ?>">
-                        <?= form_error('saldo') ?>
-                      </div>
-                      <div class="col">
-                        <label for="addon" class="mb-5"> </label>
-                        <button class="btn btn-danger mt-3 remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                      </div>
-                    </div>
-                    <hr>
+                      <hr>
                   </div>
 
                 </div>
