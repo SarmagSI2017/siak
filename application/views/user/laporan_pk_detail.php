@@ -61,82 +61,156 @@
 					<div class="table-responsive">
 						<?php
 						$a=0;
-						$debit = 0;
-						$kredit = 0;
+						$debit=0;
+						$kredit=0;
+						$hasil=0;
 						?>
 						<!-- Projects table -->
 						<table class="table align-items-center table-flush">
-							<thead class="thead-light">
-							<tr>
-								<th scope="col">No. Akun</th>
-								<th scope="col">Nama Akun</th>
-								<th scope="col">Debit</th>
-								<th scope="col">Kredit</th>
-							</tr>
-							</thead>
-							<tbody>
-							<?php
-							$totalDebit=0;
-							$totalKredit=0;
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">
+                                        <!-- No. Akun -->
+                                    </th>
+                                    <th scope="col">Nama Akun</th>
+                                    <th scope="col">Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ASET -->
+                                <tr>
+                                    <td>Aset</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php
+							$totalAset=0;
+							$totalLiabilitas=0;
+							$totalAsetNeto=0;
 							for($i=0;$i<$jumlah;$i++) :
 								$a++;
 								$s=0;
 								$deb = $saldo[$i];
 								?>
-								<tr>
-									<td>
-										<?= $data[$i][$s]->no_reff ?>
-									</td>
-									<td>
-										<?= $data[$i][$s]->nama_reff ?>
-									</td>
-									<?php
-									for($j=0;$j<count($data[$i]);$j++):
-										if($deb[$j]->jenis_saldo=="debit"){
-											$debit = $debit + $deb[$j]->saldo;
-										}else{
-											$kredit = $kredit + $deb[$j]->saldo;
-										}
-										$hasil = $debit-$kredit;
-									endfor
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "1") {?>
+                                <tr>
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
+                                    <td>
+                                        <?= $data[$i][$s]->nama_reff ?>
+                                    </td>
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalAset += $hasil;
 									?>
-									<?php
-									if($hasil>=0){ ?>
-										<td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
-										<td> - </td>
-										<?php $totalDebit += $hasil; ?>
-									<?php }else{ ?>
-										<td> - </td>
-										<td><?= 'Rp. '.number_format(abs($hasil),0,',','.') ?></td>
-										<?php $totalKredit += $hasil; ?>
-									<?php } ?>
-									<?php
-									$debit = 0;
-									$kredit = 0;
+
+                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                </tr>
+                                <?php } ?>
+                                <?php endfor ; $hasil = 0;?>
+                                <tr style="background-color:aquamarine;">
+                                    <td>Total Aset</td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalAset,0,',','.') ?></td>
+                                </tr>
+                                <!-- END OF ASET -->
+
+                                <!-- LIABILITAS -->
+                                <tr>
+                                    <td>Liabilitas</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php
+							for($i=0;$i<$jumlah;$i++) :
+								$a++;
+								$s=0;
+								$deb = $saldo[$i];
+								?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "2") {?>
+                                <tr>
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
+                                    <td>
+                                        <?= $data[$i][$s]->nama_reff ?>
+                                    </td>
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalLiabilitas += $hasil;
 									?>
-								</tr>
-							<?php endfor ?>
-							<?php if($totalDebit != abs($totalKredit)){ ?>
-								<tr>
-									<td class="text-center" colspan="2"><b>Total</b></td>
-									<td class="text-danger"><?= 'Rp. '.number_format($totalDebit,0,',','.') ?></td>
-									<td class="text-danger"><?= 'Rp. '.number_format(abs($totalKredit),0,',','.') ?></td>
-								</tr>
-								<tr class="bg-danger text-center">
-									<td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">TIDAK SEIMBANG</td>
-								</tr>
-							<?php }else{ ?>
-								<tr>
-									<td class="text-center" colspan="2"><b>Total</b></td>
-									<td class="text-success"><?= 'Rp. '.number_format($totalDebit,0,',','.') ?></td>
-									<td class="text-success"><?= 'Rp. '.number_format(abs($totalKredit),0,',','.') ?></td>
-								</tr>
-								<tr class="bg-success text-center">
-									<td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">SEIMBANG</td>
-								</tr>
-							<?php } ?>
-							</tbody>
-						</table>
+
+                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                </tr>
+                                <?php } ?>
+                                <?php endfor ?>
+                                <tr style="background-color:aquamarine;">
+                                    <td>Total Liabilitas</td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalLiabilitas,0,',','.') ?></td>
+                                </tr>
+                                <!-- END OF LIABILITAS -->
+
+								<!-- ASET NETO -->
+                                <tr>
+                                    <td>Aset Neto</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php
+							for($i=0;$i<$jumlah;$i++) :
+								$a++;
+								$s=0;
+								$deb = $saldo[$i];
+								?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "3") {?>
+                                <tr>
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
+                                    <td>
+                                        <?= $data[$i][$s]->nama_reff ?>
+                                    </td>
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalAsetNeto += $hasil;
+									?>
+
+                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                </tr>
+                                <?php } ?>
+                                <?php endfor ?>
+                                <tr style="background-color:aquamarine;">
+                                    <td>Total Aset Neto</td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalAsetNeto,0,',','.') ?></td>
+                                </tr>
+                                <!-- END OF ASET NETO -->
+
+                                <tr style="background-color:bisque;">
+                                    <?php 
+									$surplus = $totalAsetNeto + $totalLiabilitas;
+
+									if($surplus > $totalAset){ ?>
+                                    <td>Surplus(Defisit)</td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format(abs($surplus),0,',','.') ?></td>
+                                    <?php }else{ ?>
+                                    <td>Surplus(Defisit)</td>
+                                    <td></td>
+                                    <td>(<?= 'Rp. '.number_format(abs($surplus),0,',','.') ?>)</td>
+                                    <?php } ?>
+                                </tr>
+
+                            </tbody>
+                        </table>
 					</div>
 				</div>
 			</div>
