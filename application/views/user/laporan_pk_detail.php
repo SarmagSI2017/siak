@@ -74,12 +74,14 @@
                                     </th>
                                     <th scope="col">Nama Akun</th>
                                     <th scope="col">Nilai</th>
+                                    <th scope="col">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- ASET -->
                                 <tr>
                                     <td>Aset</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -108,6 +110,7 @@
 									?>
 
                                     <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                    <td></td>
                                 </tr>
                                 <?php } ?>
                                 <?php endfor ; $hasil = 0;?>
@@ -115,12 +118,14 @@
                                     <td>Total Aset</td>
                                     <td></td>
                                     <td><?= 'Rp. '.number_format($totalAset,0,',','.') ?></td>
+                                    <td></td>
                                 </tr>
                                 <!-- END OF ASET -->
 
                                 <!-- LIABILITAS -->
                                 <tr>
                                     <td>Liabilitas</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -146,6 +151,7 @@
 									?>
 
                                     <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                    <td></td>
                                 </tr>
                                 <?php } ?>
                                 <?php endfor ?>
@@ -153,12 +159,14 @@
                                     <td>Total Liabilitas</td>
                                     <td></td>
                                     <td><?= 'Rp. '.number_format($totalLiabilitas,0,',','.') ?></td>
+                                    <td></td>
                                 </tr>
                                 <!-- END OF LIABILITAS -->
 
 								<!-- ASET NETO -->
                                 <tr>
                                     <td>Aset Neto</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -184,6 +192,7 @@
 									?>
 
                                     <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                    <td></td>
                                 </tr>
                                 <?php } ?>
                                 <?php endfor ?>
@@ -191,6 +200,7 @@
                                     <td>Total Aset Neto</td>
                                     <td></td>
                                     <td><?= 'Rp. '.number_format($totalAsetNeto,0,',','.') ?></td>
+                                    <td></td>
                                 </tr>
                                 <!-- END OF ASET NETO -->
 
@@ -206,6 +216,7 @@
                                     <td>Surplus(Defisit)</td>
                                     <td></td>
                                     <td>(<?= 'Rp. '.number_format(abs($surplus),0,',','.') ?>)</td>
+                                    <td></td>
                                     <?php } ?>
                                 </tr>
 
