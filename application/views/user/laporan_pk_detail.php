@@ -203,23 +203,16 @@
                                     <td></td>
                                 </tr>
                                 <!-- END OF ASET NETO -->
-
-                                <tr style="background-color:bisque;">
-                                    <?php 
-									$surplus = $totalAsetNeto + $totalLiabilitas;
-
-									if($surplus > $totalAset){ ?>
-                                    <td>Surplus(Defisit)</td>
-                                    <td></td>
-                                    <td><?= 'Rp. '.number_format(abs($surplus),0,',','.') ?></td>
-                                    <?php }else{ ?>
-                                    <td>Surplus(Defisit)</td>
-                                    <td></td>
-                                    <td>(<?= 'Rp. '.number_format(abs($surplus),0,',','.') ?>)</td>
-                                    <td></td>
-                                    <?php } ?>
+                                <?php $surplus = $totalAsetNeto + $totalLiabilitas ?>
+                                <?php if($surplus == $totalAset){ ?>
+                                <tr  class="text-center bg-danger ">
+                                    <td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">SEIMBANG</td>
                                 </tr>
-
+                                <?php }else{  ?>
+                                <tr class="text-center bg-success">
+                                    <td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">TIDAK SEIMBANG</td>
+                                </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
 					</div>
