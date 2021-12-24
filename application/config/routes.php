@@ -94,3 +94,7 @@ $route['laporan_kompre/detail'] = 'user/laporan_kompre_detail';
 // Laporan Posisi Keuangan
 $route['laporan_pk'] = 'user/laporan_pk';
 $route['laporan_pk/detail'] = 'user/laporanPKDetail';
+
+// Laporan Aset Neto
+$route['laporan_aset_neto'] = 'user/laporanAsetNeto';
+$route['laporan_aset_neto/detail'] = 'user/laporanAsetNetoDetail';
