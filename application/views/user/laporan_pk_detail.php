@@ -110,7 +110,7 @@
 									?>
 
                                     <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
-                                    <td></td>
+                                    <td><?= $data[$i][$s]->keterangan ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php endfor ; $hasil = 0;?>
