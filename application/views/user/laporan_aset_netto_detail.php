@@ -53,8 +53,14 @@
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">Laporan Aset Netto</h3>
+							<div class="col d-flex justify-content-center">
+								<h2 class="mb-0"><b>LAPORAN ASET NETO</b></h2>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col d-flex justify-content-center">
+                            <!-- Ubah tglnya -->
+								<h4 class="mb-0"><b>Per-Bulan 2020</b></h4>
 							</div>
 						</div>
 					</div>
@@ -80,7 +86,7 @@
                             <tbody>
                                 <!-- ASET -->
                                 <tr>
-                                    <td>Aset</td>
+                                    <td><b>ASET NETO TANPA PEMBATASAN DARI PEMBERI SUMBER DAYA</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -115,7 +121,7 @@
                                 <?php } ?>
                                 <?php endfor ; $hasil = 0;?>
                                 <tr style="background-color:aquamarine;">
-                                    <td>Total Aset</td>
+                                    <td><b>Saldo Akhir</b></td>
                                     <td></td>
                                     <td><?= 'Rp. '.number_format($totalAset,0,',','.') ?></td>
                                     <td></td>
@@ -124,7 +130,7 @@
 
                                 <!-- LIABILITAS -->
                                 <tr>
-                                    <td>Liabilitas</td>
+                                    <td><b>Penghasilan Komprehensif Lain</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -156,7 +162,13 @@
                                 <?php } ?>
                                 <?php endfor ?>
                                 <tr style="background-color:aquamarine;">
-                                    <td>Total Liabilitas</td>
+                                    <td><b>Saldo Akhir</b></td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalLiabilitas,0,',','.') ?></td>
+                                    <td></td>
+                                </tr>
+                                <tr style="background-color:aquamarine;">
+                                    <td><b>Total</b></td>
                                     <td></td>
                                     <td><?= 'Rp. '.number_format($totalLiabilitas,0,',','.') ?></td>
                                     <td></td>
@@ -165,7 +177,7 @@
 
 								<!-- ASET NETO -->
                                 <tr>
-                                    <td>Aset Neto</td>
+                                    <td><b>ASET NETO DENGAN PEMBATASAN DARI PEMBERI SUMBER DAYA</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -197,13 +209,19 @@
                                 <?php } ?>
                                 <?php endfor ?>
                                 <tr style="background-color:aquamarine;">
-                                    <td>Total Aset Neto</td>
+                                    <td><b>Saldo Akhir</b></td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalAset,0,',','.') ?></td>
+                                    <td></td>
+                                </tr>
+                                <tr style="background-color:aquamarine;">
+                                    <td><b>TOTAL ASET NETO</b></td>
                                     <td></td>
                                     <td><?= 'Rp. '.number_format($totalAsetNeto,0,',','.') ?></td>
                                     <td></td>
                                 </tr>
                                 <!-- END OF ASET NETO -->
-                                <?php $surplus = $totalAsetNeto + $totalLiabilitas ?>
+                                <!-- <?php $surplus = $totalAsetNeto + $totalLiabilitas ?>
                                 <?php if($surplus == $totalAset){ ?>
                                 <tr  class="text-center bg-danger ">
                                     <td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">SEIMBANG</td>
@@ -212,7 +230,7 @@
                                 <tr class="text-center bg-success">
                                     <td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">TIDAK SEIMBANG</td>
                                 </tr>
-                                <?php } ?>
+                                <?php } ?> -->
                             </tbody>
                         </table>
 					</div>
