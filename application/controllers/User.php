@@ -447,7 +447,57 @@ class User extends CI_Controller{
 	}
 
 	/*
-	 * End Laporan LabaRugi Section
+	 * End Laporan Aset Netto Section
+	 * */
+    /*
+	 * Start Laporan Aset Netto Section
+	 * */
+	/**
+	 * Function to Render Laporan Aset Netto Template
+	 * @return void
+	 */
+	public function laporan_aset() {
+		$titleTag = 'Laporan Aset Netto';
+		$content = 'user/laporan_aset';
+		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
+		$tahun = $this->jurnal->getJurnalByYear();
+		$this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
+	}
+
+	public function laporan_aset_detail() {
+		$content = 'user/laporan_aset_detail';
+
+		$bulan = $this->input->post('bulan',true);
+		$tahun = $this->input->post('tahun',true);
+
+		$titleTag = 'Laporan Aset Netto |'.$bulan.'-'.$tahun;
+
+		if(empty($bulan) || empty($tahun)){
+			redirect('laporan_aset');
+		}
+
+		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
+		$data = null;
+		$saldo = null;
+
+		foreach($dataAkun as $row){
+			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
+			$saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
+		}
+
+		if($data == null || $saldo == null){
+			$this->session->set_flashdata('dataNull','Laporan Laba Aset Netto pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+			redirect('laporan_aset');
+		}
+
+		$jumlah = count($data);
+
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+
+	}
+
+	/*
+	 * End Laporan AsetNeto Section
 	 * */
 
     public function logout(){
