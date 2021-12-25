@@ -126,6 +126,11 @@
                                         <i class="fas fa-file-alt text-yellow"></i>Laporan Posisi Keuangan
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= base_url('laporan_aset') ?>">
+                                        <i class="fas fa-file-alt text-yellow"></i>Laporan Aset Neto
+                                    </a>
+                                </li>
                             </div>
                         </div>
                     </div>
