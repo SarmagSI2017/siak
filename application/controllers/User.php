@@ -500,6 +500,34 @@ class User extends CI_Controller{
 	 * End Laporan AsetNeto Section
 	 * */
 
+     /**
+      * Start Laporan Aset Neto Section
+      */
+
+    /**
+     * TODO:
+     * 1. Create Model Laporan Aset Neto
+     * 2. Adjust Function for FrontEnd
+     */
+    public function laporanAsetNeto() {
+        $titleTag = "Laporan Aset Neto";
+        $content = "user/laporan_aset_neto";
+        $listJurnal = $this->jurnal->getJurnalByYearAndMonth();
+        $tahun = $this->jurnal->getJurnalByYear();
+        $this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
+    }
+
+    public function laporanAsetNetoDetail() {
+        $content = 'user/laporan_aset_neto_detail';
+        $titleTag = "Laporan Aset Neto Detail";
+
+        $this->load->view('template',compact('content','titleTag'));
+    }
+
+    /**
+     * End Laporan Aset Neto Section
+     */
+
     public function logout(){
         $this->user->logout();
         redirect('');

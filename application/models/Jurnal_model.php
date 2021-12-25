@@ -64,7 +64,7 @@ class Jurnal_model extends CI_Model{
     }
 
     public function getJurnalByNoReffMonthYear($noReff,$bulan,$tahun){
-        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,akun.nama_reff,transaksi.no_reff,transaksi.jenis_saldo,transaksi.saldo,transaksi.tgl_input')
+        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,akun.nama_reff,transaksi.no_reff,transaksi.jenis_saldo,transaksi.saldo,transaksi.tgl_input,akun.keterangan')
                     ->from($this->table)            
                     ->where('transaksi.no_reff',$noReff)
                     ->where('month(transaksi.tgl_transaksi)',$bulan)
