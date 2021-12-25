@@ -127,7 +127,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= base_url('laporan_aset') ?>">
+                                    <a class="nav-link" href="<?= base_url('laporan_aset_netto') ?>">
                                         <i class="fas fa-file-alt text-yellow"></i>Laporan Aset Neto
                                     </a>
                                 </li>

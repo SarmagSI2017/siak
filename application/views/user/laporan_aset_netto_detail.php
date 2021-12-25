@@ -72,149 +72,125 @@
                                     <th scope="col">
                                         <!-- No. Akun -->
                                     </th>
-                                    <th scope="col">Nama Akun</th>
                                     <th scope="col">Nilai</th>
                                     <th scope="col">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- ASET -->
                                 <tr>
-                                    <td>Aset</td>
-                                    <td></td>
+                                    <td><b>ASET NETO TANPA PEMBATASAN DARI PEMBERI SUMBER DAYA</b>  </td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <?php
-							$totalAset=0;
-							$totalLiabilitas=0;
-							$totalAsetNeto=0;
+
+                            ?>                            
+                            <td>Saldo Awal</td>
+                            <td><?= 'Rp. '.number_format(abs($totalKas),0,',','.') ?></td>
+                            <td></td>
+                            <?php
+
+                            $totalPendapatan=0;
+							$totalBeban=0;
 							for($i=0;$i<$jumlah;$i++) :
 								$a++;
 								$s=0;
 								$deb = $saldo[$i];
 								?>
-                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "1") {?>
-                                <tr>
-                                    <td>
-                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
-                                    </td>
-                                    <td>
-                                        <?= $data[$i][$s]->nama_reff ?>
-                                    </td>
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "4") {?>
+                                
+                                    
                                     <?php
 										for($j=0;$j<count($data[$i]);$j++):
 											$hasil += $deb[$j]->saldo;
 										endfor;
-										$totalAset += $hasil;
+										$totalPendapatan += $hasil;
 									?>
 
-                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
-                                    <td><?= $data[$i][$s]->keterangan ?></td>
-                                </tr>
+                                    
+                                
                                 <?php } ?>
                                 <?php endfor ; $hasil = 0;?>
-                                <tr style="background-color:aquamarine;">
-                                    <td>Total Aset</td>
-                                    <td></td>
-                                    <td><?= 'Rp. '.number_format($totalAset,0,',','.') ?></td>
-                                    <td></td>
-                                </tr>
-                                <!-- END OF ASET -->
+                                
+                                <!-- END OF PENDAPATAN -->
 
-                                <!-- LIABILITAS -->
-                                <tr>
-                                    <td>Liabilitas</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <!-- BEBAN -->
+
                                 <?php
 							for($i=0;$i<$jumlah;$i++) :
 								$a++;
 								$s=0;
 								$deb = $saldo[$i];
 								?>
-                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "2") {?>
-                                <tr>
-                                    <td>
-                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
-                                    </td>
-                                    <td>
-                                        <?= $data[$i][$s]->nama_reff ?>
-                                    </td>
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "5") {?>
+                               
                                     <?php
 										for($j=0;$j<count($data[$i]);$j++):
 											$hasil += $deb[$j]->saldo;
 										endfor;
-										$totalLiabilitas += $hasil;
+										$totalBeban += $hasil;
 									?>
 
-                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
-                                    <td></td>
-                                </tr>
                                 <?php } ?>
                                 <?php endfor ?>
-                                <tr style="background-color:aquamarine;">
-                                    <td>Total Liabilitas</td>
-                                    <td></td>
-                                    <td><?= 'Rp. '.number_format($totalLiabilitas,0,',','.') ?></td>
-                                    <td></td>
-                                </tr>
-                                <!-- END OF LIABILITAS -->
-
-								<!-- ASET NETO -->
                                 <tr>
-                                    <td>Aset Neto</td>
-                                    <td></td>
-                                    <td></td>
+                                    <?php 
+									$surplus = $totalPendapatan - $totalBeban;
+
+									if($surplus > 0){ ?>
+                                    <td>Surplus(Defisit)</td>
+
+                                    <td><?= 'Rp. '.number_format(abs($surplus),0,',','.') ?></td>
+                                    <?php }else{ ?>
+                                    <td>Surplus(Defisit)</td>
+
+                                    <td>(<?= 'Rp. '.number_format(abs($surplus),0,',','.') ?>)</td>
+                                    <?php } ?>
                                     <td></td>
                                 </tr>
+
+                                
+                            <tr style="background-color:aquamarine;">
+                                <td>Total</td>
                                 <?php
-							for($i=0;$i<$jumlah;$i++) :
-								$a++;
-								$s=0;
-								$deb = $saldo[$i];
-								?>
-                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "3") {?>
-                                <tr>
-                                    <td>
-                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
-                                    </td>
-                                    <td>
-                                        <?= $data[$i][$s]->nama_reff ?>
-                                    </td>
-                                    <?php
-										for($j=0;$j<count($data[$i]);$j++):
-											$hasil += $deb[$j]->saldo;
-										endfor;
-										$totalAsetNeto += $hasil;
-									?>
+                                if($surplus+$totalKas>=0){?>
+                                <td><?= 'Rp. '.number_format(abs($surplus+$totalKas),0,',','.') ?></td>
+                                <?php } else{?>
+                                <td>(<?= 'Rp. '.number_format(abs($surplus+$totalKas),0,',','.') ?>)</td>
+                                <?php } ?>
+                                <td></td>
+                            </tr>
 
-                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
-                                    <td></td>
-                                </tr>
-                                <?php } ?>
-                                <?php endfor ?>
-                                <tr style="background-color:aquamarine;">
-                                    <td>Total Aset Neto</td>
-                                    <td></td>
-                                    <td><?= 'Rp. '.number_format($totalAsetNeto,0,',','.') ?></td>
-                                    <td></td>
-                                </tr>
-                                <!-- END OF ASET NETO -->
-                                <?php $surplus = $totalAsetNeto + $totalLiabilitas ?>
-                                <?php if($surplus == $totalAset){ ?>
-                                <tr  class="text-center bg-danger ">
-                                    <td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">SEIMBANG</td>
-                                </tr>
-                                <?php }else{  ?>
-                                <tr class="text-center bg-success">
-                                    <td colspan="6" class="text-white" style="font-weight:bolder;font-size:19px">TIDAK SEIMBANG</td>
-                                </tr>
-                                <?php } ?>
+
+                            <tr>
+                                <td><b>ASET NETO DENGAN PEMBATASAN DARI PEMBERI SUMBER DAYA</b></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>Saldo Awal</td>
+                                <td><?= 'Rp. '.number_format(0,0,',','.') ?></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Surplus(Defisit)</td>
+                                <td><?= 'Rp. '.number_format(0,0,',','.') ?></td>
+                                <td></td>
+                            </tr>
+                            <tr style="background-color:aquamarine;">
+                                <td>Total</td>
+                                <td><?= 'Rp. '.number_format(0,0,',','.') ?></td>
+                                <td></td>
+                            </tr>
+
+
+                            
+
+
                             </tbody>
                         </table>
+                        
 					</div>
 				</div>
 			</div>

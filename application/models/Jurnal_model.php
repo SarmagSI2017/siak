@@ -75,6 +75,17 @@ class Jurnal_model extends CI_Model{
                     ->result();
     }
 
+    public function getLastMonthCash($bulan,$tahun){
+        $where=$tahun.'-'.$bulan.'-01';
+        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,transaksi.jenis_saldo,transaksi.saldo')
+                    ->from($this->table)            
+                    ->where('transaksi.no_reff','111')
+                    ->where('transaksi.tgl_transaksi <=',$where)
+                    ->get()
+                    ->result();
+    }
+    
+
     public function getJurnalByNoReffSaldo($noReff){
         return $this->db->select('transaksi.jenis_saldo,transaksi.saldo')
                     ->from($this->table)            

@@ -295,6 +295,8 @@ class User extends CI_Controller{
         foreach($dataAkun as $row){
             $data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
             $saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
+
+            
         }
 
         if($data == null || $saldo == null){
@@ -480,19 +482,32 @@ class User extends CI_Controller{
 		$data = null;
 		$saldo = null;
 
+        $kas = $this->jurnal->getLastMonthCash($bulan,$tahun);
+
+        
+
+        $totalKas=0;
+        $totalSurplus=0;
+
 		foreach($dataAkun as $row){
 			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
 			$saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
 		}
 
+        foreach($kas as $temp)
+        {
+            if($temp->jenis_saldo=="debit") $totalKas+=$temp->saldo;
+            else $totalKas-=$temp->saldo;
+        }
+
 		if($data == null || $saldo == null){
-			$this->session->set_flashdata('dataNull','Laporan Laba Aset Netto pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+			$this->session->set_flashdata('dataNull','Laporan Aset Netto pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
 			redirect('laporan_aset_netto');
 		}
 
 		$jumlah = count($data);
 
-		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo','totalKas'));
 
 	}
 
