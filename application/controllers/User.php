@@ -456,16 +456,16 @@ class User extends CI_Controller{
 	 * Function to Render Laporan Aset Netto Template
 	 * @return void
 	 */
-	public function laporan_aset() {
+	public function laporan_aset_netto() {
 		$titleTag = 'Laporan Aset Netto';
-		$content = 'user/laporan_aset';
+		$content = 'user/laporan_aset_netto';
 		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
 		$tahun = $this->jurnal->getJurnalByYear();
 		$this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
 	}
 
-	public function laporan_aset_detail() {
-		$content = 'user/laporan_aset_detail';
+	public function laporan_aset_netto_detail() {
+		$content = 'user/laporan_aset_netto_detail';
 
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
@@ -473,7 +473,7 @@ class User extends CI_Controller{
 		$titleTag = 'Laporan Aset Netto |'.$bulan.'-'.$tahun;
 
 		if(empty($bulan) || empty($tahun)){
-			redirect('laporan_aset');
+			redirect('laporan_aset_netto');
 		}
 
 		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
@@ -487,7 +487,7 @@ class User extends CI_Controller{
 
 		if($data == null || $saldo == null){
 			$this->session->set_flashdata('dataNull','Laporan Laba Aset Netto pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
-			redirect('laporan_aset');
+			redirect('laporan_aset_netto');
 		}
 
 		$jumlah = count($data);
@@ -496,37 +496,6 @@ class User extends CI_Controller{
 
 	}
 
-	/*
-	 * End Laporan AsetNeto Section
-	 * */
-
-     /**
-      * Start Laporan Aset Neto Section
-      */
-
-    /**
-     * TODO:
-     * 1. Create Model Laporan Aset Neto
-     * 2. Adjust Function for FrontEnd
-     */
-    public function laporanAsetNeto() {
-        $titleTag = "Laporan Aset Neto";
-        $content = "user/laporan_aset_neto";
-        $listJurnal = $this->jurnal->getJurnalByYearAndMonth();
-        $tahun = $this->jurnal->getJurnalByYear();
-        $this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
-    }
-
-    public function laporanAsetNetoDetail() {
-        $content = 'user/laporan_aset_neto_detail';
-        $titleTag = "Laporan Aset Neto Detail";
-
-        $this->load->view('template',compact('content','titleTag'));
-    }
-
-    /**
-     * End Laporan Aset Neto Section
-     */
 
     public function logout(){
         $this->user->logout();
