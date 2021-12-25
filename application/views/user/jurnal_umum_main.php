@@ -117,11 +117,11 @@
                             <?= form_button(['type' => 'submit', 'content' => 'Lihat Transaksi', 'class' => 'btn btn-success mr-3']) ?>
                             <?= form_close() ?>
                           </div>
-                          <div class="col-md-3 mr-3">
+                          <!-- <div class="col-md-3 mr-3">
                             <?= form_open('', '', ['bulan' => $bulan, 'tahun' => $tahun]) ?>
                             <?= form_button(['type' => 'submit', 'content' => 'Cetak', 'class' => 'btn btn-warning mr-3']) ?>
                             <?= form_close() ?>
-                          </div>
+                          </div> -->
                         </div>
 
                       </td>
