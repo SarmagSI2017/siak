@@ -124,7 +124,7 @@ class User extends CI_Controller{
     }
 
     public function jurnalUmum(){
-        $titleTag = 'Jurnal Umum';
+        $titleTag = 'Rekam Transaksi';
         $content = 'user/jurnal_umum_main';
         $listJurnal = $this->jurnal->getJurnalByYearAndMonth();
         $tahun = $this->jurnal->getJurnalByYear();
@@ -133,7 +133,7 @@ class User extends CI_Controller{
 
     public function jurnalUmumDetail(){
         $content = 'user/jurnal_umum';
-        $titleTag = 'Jurnal Umum';
+        $titleTag = 'Rekam Transaksi';
 
         $bulan = $this->input->post('bulan',true);
         $tahun = $this->input->post('tahun',true);
@@ -161,7 +161,7 @@ class User extends CI_Controller{
         $action = 'jurnal_umum/tambah'; 
         $tgl_input = date('Y-m-d H:i:s'); 
         $id_user = $this->session->userdata('id'); 
-        $titleTag = 'Tambah Jurnal Umum';
+        $titleTag = 'Tambah Rekam Transaksi';
 
         if(!$_POST){
             $data = (object) $this->jurnal->getDefaultValues();
@@ -357,7 +357,7 @@ class User extends CI_Controller{
 	 * @return void
 	 */
 	public function laporan_pk() {
-		$titleTag = 'laporan_pk';
+		$titleTag = 'Laporan Posisi Keuangan';
 		$content = 'user/laporan_pk';
 		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
 		$tahun = $this->jurnal->getJurnalByYear();
@@ -366,10 +366,11 @@ class User extends CI_Controller{
 
 	public function laporanPKDetail() {
 		$content = 'user/laporan_pk_detail';
-		$titleTag = 'Laporan Posisi Keuangan';
-
+        
+        
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
+		$titleTag = 'Laporan Posisi Keuangan  | '.bulan($bulan).' Tahun '.date('Y',strtotime($tahun));;
 
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_pk');
@@ -378,6 +379,7 @@ class User extends CI_Controller{
 		$dataAkun = $this->akun->getAkunPKByMonthYear($bulan,$tahun);
 		$data = null;
 		$saldo = null;
+        $periode= bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
 
 		foreach($dataAkun as $row){
 			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
@@ -391,7 +393,7 @@ class User extends CI_Controller{
 
 		$jumlah = count($data);
 
-		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo','periode'));
 
 	}
 
@@ -407,7 +409,7 @@ class User extends CI_Controller{
 	 * @return void
 	 */
 	public function laporan_kompre() {
-		$titleTag = 'Laporan Laba Rugi';
+		$titleTag = 'Laporan Komprehensif';
 		$content = 'user/laporan_kompre';
 		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
 		$tahun = $this->jurnal->getJurnalByYear();
@@ -420,7 +422,8 @@ class User extends CI_Controller{
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
 
-		$titleTag = 'Laporan Laba Rugi |'.$bulan.'-'.$tahun;
+		$titleTag = 'Laporan Komprehensif | '.bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+        $periode= bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
 
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_kompre');
@@ -442,7 +445,7 @@ class User extends CI_Controller{
 
 		$jumlah = count($data);
 
-		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo', 'periode'));
 
 	}
 
@@ -470,7 +473,7 @@ class User extends CI_Controller{
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
 
-		$titleTag = 'Laporan Aset Netto |'.$bulan.'-'.$tahun;
+		$titleTag = 'Laporan Aset Netto |'.bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
 
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_aset_netto');
@@ -479,6 +482,7 @@ class User extends CI_Controller{
 		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
 		$data = null;
 		$saldo = null;
+        $periode = bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
 
 		foreach($dataAkun as $row){
 			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
@@ -492,7 +496,7 @@ class User extends CI_Controller{
 
 		$jumlah = count($data);
 
-		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo', 'periode'));
 
 	}
 
