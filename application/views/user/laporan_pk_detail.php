@@ -39,7 +39,7 @@
                                     <th scope="col">
                                         <!-- No. Akun -->
                                     </th>
-                                    <th scope="col">Nama Akun</th>
+                                    <th></th>
                                     <th scope="col">Nilai</th>
                                     <th scope="col">Keterangan</th>
                                 </tr>
@@ -64,9 +64,6 @@
                                 <?php if( substr($data[$i][$s]->no_reff,0,1) == "1") {?>
                                 <tr>
                                     <td>
-                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
-                                    </td>
-                                    <td>
                                         <?= $data[$i][$s]->nama_reff ?>
                                     </td>
                                     <?php
@@ -75,7 +72,9 @@
 										endfor;
 										$totalAset += $hasil;
 									?>
-
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
                                     <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
                                     <td><?= $data[$i][$s]->keterangan ?></td>
                                 </tr>
@@ -189,9 +188,6 @@
                                 <?php if( substr($data[$i][$s]->no_reff,0,1) == "1") {?>
                                 <tr>
                                     <td>
-                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
-                                    </td>
-                                    <td>
                                         <?= $data[$i][$s]->nama_reff ?>
                                     </td>
                                     <?php
@@ -200,7 +196,9 @@
 										endfor;
 										$totalAset += $hasil;
 									?>
-
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
                                     <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
                                     <td><?= $data[$i][$s]->keterangan ?></td>
                                 </tr>
