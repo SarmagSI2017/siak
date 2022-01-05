@@ -47,7 +47,132 @@
                             <tbody>
                                 <!-- ASET -->
                                 <tr>
-                                    <td>Aset</td>
+                                    <td><b>ASET TANPA PEMBATASAN DARI PEMBERI SUMBER DAYA</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php
+							$totalAset=0;
+							$totalLiabilitas=0;
+							$totalAsetNeto=0;
+							for($i=0;$i<$jumlah;$i++) :
+								$a++;
+								$s=0;
+								$deb = $saldo[$i];
+								?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "1") {?>
+                                <tr>
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
+                                    <td>
+                                        <?= $data[$i][$s]->nama_reff ?>
+                                    </td>
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalAset += $hasil;
+									?>
+
+                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                    <td><?= $data[$i][$s]->keterangan ?></td>
+                                </tr>
+                                <?php } ?>
+                                <?php endfor ; $hasil = 0;?>
+                                <tr style="background-color:aquamarine;">
+                                    <td>Total Aset</td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalAset,0,',','.') ?></td>
+                                    <td></td>
+                                </tr>
+                                <!-- END OF ASET -->
+
+                                <!-- LIABILITAS -->
+                                <tr>
+                                    <td>Liabilitas</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php
+							for($i=0;$i<$jumlah;$i++) :
+								$a++;
+								$s=0;
+								$deb = $saldo[$i];
+								?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "2") {?>
+                                <tr>
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
+                                    <td>
+                                        <?= $data[$i][$s]->nama_reff ?>
+                                    </td>
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalLiabilitas += $hasil;
+									?>
+
+                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                    <td></td>
+                                </tr>
+                                <?php } ?>
+                                <?php endfor ?>
+                                <tr style="background-color:aquamarine;">
+                                    <td>Total Liabilitas</td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalLiabilitas,0,',','.') ?></td>
+                                    <td></td>
+                                </tr>
+                                <!-- END OF LIABILITAS -->
+
+								<!-- ASET NETO -->
+                                <tr>
+                                    <td>Aset Neto</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php
+							for($i=0;$i<$jumlah;$i++) :
+								$a++;
+								$s=0;
+								$deb = $saldo[$i];
+								?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "3") {?>
+                                <tr>
+                                    <td>
+                                        <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                    </td>
+                                    <td>
+                                        <?= $data[$i][$s]->nama_reff ?>
+                                    </td>
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalAsetNeto += $hasil;
+									?>
+
+                                    <td><?= 'Rp. '.number_format($hasil,0,',','.') ?></td>
+                                    <td></td>
+                                </tr>
+                                <?php } ?>
+                                <?php endfor ?>
+                                <tr style="background-color:aquamarine;">
+                                    <td>Total Aset Neto</td>
+                                    <td></td>
+                                    <td><?= 'Rp. '.number_format($totalAsetNeto,0,',','.') ?></td>
+                                    <td></td>
+                                </tr>
+                                <tbody>
+                                <!-- ASET -->
+                                <tr>
+                                    <td><b>ASET DENGAN PEMBATASAN DARI PEMBERI SUMBER DAYA</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
