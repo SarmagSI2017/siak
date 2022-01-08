@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 29, 2021 at 09:07 PM
+-- Generation Time: Jan 08, 2022 at 10:15 AM
 -- Server version: 10.3.31-MariaDB-0+deb10u1
 -- PHP Version: 7.3.31-1~deb10u1
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `unsur_laporan_keuangan` (
   `no_unsur` int(11) NOT NULL,
-  `nama_unsur` varchar(25) NOT NULL
+  `nama_unsur` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -37,10 +37,11 @@ CREATE TABLE `unsur_laporan_keuangan` (
 
 INSERT INTO `unsur_laporan_keuangan` (`no_unsur`, `nama_unsur`) VALUES
 (1, 'Aset'),
-(2, 'Liabilitas'),
-(3, 'Ekuitas'),
-(4, 'Penghasilan'),
-(5, 'Beban');
+(2, 'Liability'),
+(3, 'Aset Neto'),
+(4, 'Pendapatan'),
+(5, 'Beban'),
+(6, 'Dengan Pembatasan dari Pemberi Sumber Daya');
 
 --
 -- Indexes for dumped tables
@@ -60,7 +61,7 @@ ALTER TABLE `unsur_laporan_keuangan`
 -- AUTO_INCREMENT for table `unsur_laporan_keuangan`
 --
 ALTER TABLE `unsur_laporan_keuangan`
-  MODIFY `no_unsur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `no_unsur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
