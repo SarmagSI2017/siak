@@ -61,7 +61,8 @@ $route['dashboard'] = 'user/index';
 // DATA AKUN
 $route['data_akun'] = 'user/dataAkun';
 $route['data_akun/tambah'] = 'user/createAkun';
-$route['data_akun/edit/(:num)'] = 'user/editAkun/$1';
+// $route['data_akun/edit/(:num)'] = 'user/editAkun/$1';
+$route['data_akun/edit/(:any)'] = 'user/editAkun/$1';
 $route['data_akun/hapus'] = 'user/deleteAkun';
 
 // JURNAL UMUM

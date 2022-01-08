@@ -38,26 +38,26 @@
                       <div class="row mb-4">
                         <div class="col">
                           <label for="no_reff">Nama Akun</label>
-                          <?= form_dropdown('no_reff', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
+                          <?= form_dropdown('no_reff[]', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
                           <?= form_error('no_reff') ?>
                         </div>
                         <div class="col">
                           <label for="reff">No. Reff</label>
-                          <input type="text" name="reff" class="form-control" id="reff" readonly>
+                          <input type="text" name="reff[]" class="form-control" id="reff" readonly>
                         </div>
                         <div class="col">
                           <label for="jenis_saldo">Jenis Saldo</label>
-                          <?= form_dropdown('jenis_saldo', ['debit' => 'Debit', 'kredit' => 'Kredit'], $data->jenis_saldo, ['class' => 'form-control jenis_saldo', 'id' => 'jenis_saldo']); ?>
+                          <?= form_dropdown('jenis_saldo[]', ['debit' => 'Debit', 'kredit' => 'Kredit'], $data->jenis_saldo, ['class' => 'form-control jenis_saldo', 'id' => 'jenis_saldo']); ?>
                           <?= form_error('jenis_saldo') ?>
                         </div>
                         <div class="col">
                           <label for="saldo">Saldo</label>
-                          <input type="text" name="saldo" class="form-control saldo" id="saldo" value="<?= $data->saldo ?>">
+                          <input type="text" name="saldo[]" class="form-control saldo" id="saldo" value="<?= $data->saldo ?>">
                           <?= form_error('saldo') ?>
                         </div>
                         <div class="col">
                           <label for="keterangan">Keterangan</label>
-                          <input type="text" name="keterangan" class="form-control saldo" id="keterangan" value="">
+                          <input type="text" name="keterangan[]" class="form-control saldo" id="keterangan" value="">
                           <?= form_error('saldo') ?>
                         </div>
                         <div class="col">
@@ -85,26 +85,26 @@
                       <div class="row mb-4">
                         <div class="col">
                           <label for="no_reff">Nama Akun</label>
-                          <?= form_dropdown('no_reff', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
+                          <?= form_dropdown('no_reff[]', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
                           <?= form_error('no_reff') ?>
                         </div>
                         <div class="col">
                           <label for="reff">No. Reff</label>
-                          <input type="text" name="reff" class="form-control" id="reff" readonly>
+                          <input type="text" name="reff[]" class="form-control" id="reff" readonly>
                         </div>
                         <div class="col">
                           <label for="jenis_saldo">Jenis Saldo</label>
-                          <?= form_dropdown('jenis_saldo', ['debit' => 'Debit', 'kredit' => 'Kredit'], $data->jenis_saldo, ['class' => 'form-control jenis_saldo', 'id' => 'jenis_saldo']); ?>
+                          <?= form_dropdown('jenis_saldo[]', ['debit' => 'Debit', 'kredit' => 'Kredit'], $data->jenis_saldo, ['class' => 'form-control jenis_saldo', 'id' => 'jenis_saldo']); ?>
                           <?= form_error('jenis_saldo') ?>
                         </div>
                         <div class="col">
                           <label for="saldo">Saldo</label>
-                          <input type="text" name="saldo" class="form-control saldo" id="saldo" value="<?= $data->saldo ?>">
+                          <input type="text" name="saldo[]" class="form-control saldo" id="saldo" value="<?= $data->saldo ?>">
                           <?= form_error('saldo') ?>
                         </div>
                         <div class="col">
                           <label for="keterangan">Keterangan</label>
-                          <input type="text" name="keterangan" class="form-control saldo" id="keterangan" value="">
+                          <input type="text" name="keterangan[]" class="form-control saldo" id="keterangan" value="">
                           <?= form_error('saldo') ?>
                         </div>
                         <div class="col">

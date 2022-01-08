@@ -2,20 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Akun_model extends CI_Model{
-    private $table = 'akun';
+    // private $table = 'akun';
+    private $table = 'akun_temp';
 
     public function getAkun(){
         return $this->db->get($this->table)->result();
     }
 
     public function getAkunByMonthYear($bulan,$tahun){
-        return $this->db->select('akun.no_reff,akun.nama_reff,akun.keterangan,transaksi.tgl_transaksi')
+        return $this->db->select('akun_temp.no_reff,akun_temp.nama_reff,akun_temp.keterangan,transaksi_temp.tgl_transaksi')
                         ->from($this->table)
-                        ->where('month(transaksi.tgl_transaksi)',$bulan)
-                        ->where('year(transaksi.tgl_transaksi)',$tahun)
-                        ->join('transaksi','transaksi.no_reff = akun.no_reff')
-                        ->group_by('akun.nama_reff')
-                        ->order_by('akun.no_reff')
+                        ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+                        ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                        ->join('transaksi_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                        ->group_by('akun_temp.nama_reff')
+                        ->order_by('akun_temp.no_reff')
                         ->get()
                         ->result();
     }
@@ -53,14 +54,17 @@ class Akun_model extends CI_Model{
 	 * @return mixed
 	 */
 	public function getAkunPKByMonthYear($bulan,$tahun){
-		return $this->db->select('akun.no_reff,akun.nama_reff,akun.keterangan,transaksi.tgl_transaksi')
+		return $this->db->select('akun_temp.no_reff,akun_temp.nama_reff,akun_temp.keterangan,transaksi_temp.tgl_transaksi')
 			->from($this->table)
-			->where('month(transaksi.tgl_transaksi)',$bulan)
-			->where('year(transaksi.tgl_transaksi)',$tahun)
-			->where('transaksi.no_reff<',400)
-			->join('transaksi','transaksi.no_reff = akun.no_reff')
-			->group_by('akun.nama_reff')
-			->order_by('akun.no_reff')
+			->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+			->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+			// ->where('transaksi_temp.no_reff<',400)
+            ->like('transaksi_temp.no_reff','1-')
+            ->or_like('transaksi_temp.no_reff','2-')
+            ->or_like('transaksi_temp.no_reff','3-')
+			->join('transaksi_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+			->group_by('akun_temp.nama_reff')
+			->order_by('akun_temp.no_reff')
 			->get()
 			->result();
 	}
@@ -74,15 +78,15 @@ class Akun_model extends CI_Model{
 	 * @return mixed
 	 */
 	public function getAkunLRByMonthYear($bulan,$tahun){
-		return $this->db->select('akun.no_reff,akun.nama_reff,akun.keterangan,transaksi.tgl_transaksi')
+		return $this->db->select('akun_temp.no_reff,akun_temp.nama_reff,akun_temp.keterangan,transaksi_temp.tgl_transaksi')
 			->from($this->table)
-			->where('month(transaksi.tgl_transaksi)',$bulan)
-			->where('year(transaksi.tgl_transaksi)',$tahun)
-			->where('transaksi.no_reff>',400)
-            ->where('transaksi.no_reff<',600)
-			->join('transaksi','transaksi.no_reff = akun.no_reff')
-			->group_by('akun.nama_reff')
-			->order_by('akun.no_reff')
+			->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+			->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+			->like('transaksi_temp.no_reff','4-')
+            ->or_like('transaksi_temp.no_reff','5-')
+			->join('transaksi_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+			->group_by('akun_temp.nama_reff')
+			->order_by('akun_temp.no_reff')
 			->get()
 			->result();
 	}

@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jurnal_model extends CI_Model{
-    private $table = 'transaksi';
+    private $table = 'transaksi_temp';
+    
 
     public function getJurnal(){
         return $this->db->get($this->table)->result();
@@ -34,42 +35,42 @@ class Jurnal_model extends CI_Model{
     }
 
     public function getAkunInJurnal(){
-        return $this->db->select('transaksi.no_reff,akun.no_reff,akun.nama_reff')
+        return $this->db->select('transaksi_temp.no_reff,akun_temp.no_reff,akun_temp.nama_reff')
                     ->from($this->table)            
-                    ->join('akun','transaksi.no_reff = akun.no_reff')
-                    ->order_by('akun.no_reff','ASC')
-                    ->group_by('akun.nama_reff')
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff','ASC')
+                    ->group_by('akun_temp.nama_reff')
                     ->get()
                     ->result();
     }
 
     public function countAkunInJurnal(){
-        return $this->db->select('transaksi.no_reff,akun.no_reff,akun.nama_reff')
+        return $this->db->select('transaksi_temp.no_reff,akun_temp.no_reff,akun_temp.nama_reff')
                     ->from($this->table)            
-                    ->join('akun','transaksi.no_reff = akun.no_reff')
-                    ->order_by('akun.no_reff','ASC')
-                    ->group_by('akun.nama_reff')
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff','ASC')
+                    ->group_by('akun_temp.nama_reff')
                     ->get()
                     ->num_rows();
     }
 
     public function getJurnalByNoReff($noReff){
-        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,akun.nama_reff,transaksi.no_reff,transaksi.jenis_saldo,transaksi.saldo,transaksi.tgl_input')
+        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,akun_temp.nama_reff,transaksi_temp.no_reff,transaksi_temp.jenis_saldo,transaksi_temp.saldo,transaksi_temp.tgl_input')
                     ->from($this->table)            
-                    ->where('transaksi.no_reff',$noReff)
-                    ->join('akun','transaksi.no_reff = akun.no_reff')
+                    ->where('transaksi_temp.no_reff',$noReff)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
                     ->order_by('tgl_transaksi','ASC')
                     ->get()
                     ->result();
     }
 
     public function getJurnalByNoReffMonthYear($noReff,$bulan,$tahun){
-        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,akun.nama_reff,transaksi.no_reff,transaksi.jenis_saldo,transaksi.saldo,transaksi.tgl_input,akun.keterangan')
+        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,akun_temp.nama_reff,transaksi_temp.no_reff,transaksi_temp.jenis_saldo,transaksi_temp.saldo,transaksi_temp.tgl_input,akun_temp.keterangan')
                     ->from($this->table)            
-                    ->where('transaksi.no_reff',$noReff)
-                    ->where('month(transaksi.tgl_transaksi)',$bulan)
-                    ->where('year(transaksi.tgl_transaksi)',$tahun)
-                    ->join('akun','transaksi.no_reff = akun.no_reff')
+                    ->where('transaksi_temp.no_reff',$noReff)
+                    ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
                     ->order_by('tgl_transaksi','ASC')
                     ->get()
                     ->result();
@@ -77,41 +78,41 @@ class Jurnal_model extends CI_Model{
 
     public function getLastMonthCash($bulan,$tahun){
         $where=$tahun.'-'.$bulan.'-01';
-        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,transaksi.jenis_saldo,transaksi.saldo')
+        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo')
                     ->from($this->table)            
-                    ->where('transaksi.no_reff','111')
-                    ->where('transaksi.tgl_transaksi <=',$where)
+                    ->where('transaksi_temp.no_reff','111')
+                    ->where('transaksi_temp.tgl_transaksi <=',$where)
                     ->get()
                     ->result();
     }
     
 
     public function getJurnalByNoReffSaldo($noReff){
-        return $this->db->select('transaksi.jenis_saldo,transaksi.saldo')
+        return $this->db->select('transaksi_temp.jenis_saldo,transaksi_temp.saldo')
                     ->from($this->table)            
-                    ->where('transaksi.no_reff',$noReff)
-                    ->join('akun','transaksi.no_reff = akun.no_reff')
+                    ->where('transaksi_temp.no_reff',$noReff)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
                     ->order_by('tgl_transaksi','ASC')
                     ->get()
                     ->result();
     }
 
     public function getJurnalByNoReffSaldoMonthYear($noReff,$bulan,$tahun){
-        return $this->db->select('transaksi.jenis_saldo,transaksi.saldo')
+        return $this->db->select('transaksi_temp.jenis_saldo,transaksi_temp.saldo')
                     ->from($this->table)            
-                    ->where('transaksi.no_reff',$noReff)
-                    ->where('month(transaksi.tgl_transaksi)',$bulan)
-                    ->where('year(transaksi.tgl_transaksi)',$tahun)
-                    ->join('akun','transaksi.no_reff = akun.no_reff')
+                    ->where('transaksi_temp.no_reff',$noReff)
+                    ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
                     ->order_by('tgl_transaksi','ASC')
                     ->get()
                     ->result();
     }
 
     public function getJurnalJoinAkun(){
-        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,akun.nama_reff,transaksi.no_reff,transaksi.jenis_saldo,transaksi.saldo,transaksi.tgl_input')
+        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,akun_temp.nama_reff,transaksi_temp.no_reff,transaksi_temp.jenis_saldo,transaksi_temp.saldo,transaksi_temp.tgl_input')
                         ->from($this->table)
-                        ->join('akun','transaksi.no_reff = akun.no_reff')
+                        ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
                         ->order_by('tgl_transaksi','ASC')
                         ->order_by('tgl_input','ASC')
                         ->order_by('jenis_saldo','ASC')
@@ -120,11 +121,11 @@ class Jurnal_model extends CI_Model{
     }
 
     public function getJurnalJoinAkunDetail($bulan,$tahun){
-        return $this->db->select('transaksi.id_transaksi,transaksi.tgl_transaksi,akun.nama_reff,transaksi.no_reff,transaksi.jenis_saldo,transaksi.saldo,transaksi.tgl_input')
+        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,akun_temp.nama_reff,transaksi_temp.no_reff,transaksi_temp.jenis_saldo,transaksi_temp.saldo,transaksi_temp.tgl_input')
                         ->from($this->table)
-                        ->where('month(transaksi.tgl_transaksi)',$bulan)
-                        ->where('year(transaksi.tgl_transaksi)',$tahun)
-                        ->join('akun','transaksi.no_reff = akun.no_reff')
+                        ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+                        ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                        ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
                         ->order_by('tgl_transaksi','ASC')
                         ->order_by('tgl_input','ASC')
                         ->order_by('jenis_saldo','ASC')
@@ -135,8 +136,8 @@ class Jurnal_model extends CI_Model{
     public function getTotalSaldoDetail($jenis_saldo,$bulan,$tahun){
         return $this->db->select_sum('saldo')
                         ->from($this->table)
-                        ->where('month(transaksi.tgl_transaksi)',$bulan)
-                        ->where('year(transaksi.tgl_transaksi)',$tahun)
+                        ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+                        ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
                         ->where('jenis_saldo',$jenis_saldo)
                         ->get()
                         ->row();
@@ -196,8 +197,40 @@ class Jurnal_model extends CI_Model{
         ];
     }
 
+    public function getJurnalValidationRules(){
+        return [
+            [
+                'field'=>'tgl_transaksi',
+                'label'=>'Tanggal Transaksi',
+                'rules'=>'trim|required'
+            ],
+            [
+                'field'=>'no_reff[]',
+                'label'=>'Nama Akun',
+                'rules'=>'trim|required'
+            ],
+            [
+                'field'=>'jenis_saldo[]',
+                'label'=>'Jenis Saldo',
+                'rules'=>'trim|required'
+            ],
+            [
+                'field'=>'saldo[]',
+                'label'=>'Saldo',
+                'rules'=>'trim|required|numeric'
+            ],
+        ];
+    }
+
     public function validate(){
         $rules = $this->getValidationRules();
+        $this->form_validation->set_rules($rules);
+        $this->form_validation->set_error_delimiters('<span class="text-danger" style="font-size:14px">','</span>');
+        return $this->form_validation->run();
+    }
+
+    public function validateJurnalCreation(){
+        $rules = $this->getJurnalValidationRules();
         $this->form_validation->set_rules($rules);
         $this->form_validation->set_error_delimiters('<span class="text-danger" style="font-size:14px">','</span>');
         return $this->form_validation->run();

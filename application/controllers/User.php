@@ -47,8 +47,10 @@ class User extends CI_Controller{
     }
 
     public function isNamaAkunThere($str){
+        
         $namaAkun = $this->akun->countAkunByNama($str);
-        if($namaAkun >= 1){
+        $similarAkun = $this->akun->getAkunByNo($this->input->post('no_reff'));
+        if($namaAkun >= 1 and strtolower($similarAkun->nama_reff) != strtolower($str)){
             $this->form_validation->set_message('isNamaAkunThere', 'Nama Akun Sudah Ada');
             return false;
         }
@@ -166,22 +168,29 @@ class User extends CI_Controller{
         if(!$_POST){
             $data = (object) $this->jurnal->getDefaultValues();
         }else{
-            $data = (object) [
-                'id_user'=>$id_user,
-                'no_reff'=>$this->input->post('no_reff',true),
-                'tgl_input'=>$tgl_input,
-                'tgl_transaksi'=>$this->input->post('tgl_transaksi',true),
-                'jenis_saldo'=>$this->input->post('jenis_saldo',true),
-                'saldo'=>$this->input->post('saldo',true)
-            ];
+
+            
+            for($i=0;$i<count($_POST['no_reff']);$i++)
+            {
+                $data = (object) [
+                    'id_user'=>$id_user,
+                    'no_reff'=>$this->input->post('no_reff[' . $i . ']',true),
+                    'tgl_input'=>$tgl_input,
+                    'tgl_transaksi'=>$this->input->post('tgl_transaksi',true),
+                    'jenis_saldo'=>$this->input->post('jenis_saldo[' . $i . ']',true),
+                    'saldo'=>$this->input->post('saldo[' . $i . ']',true)
+                ];
+                $this->jurnal->insertJurnal($data);
+            }
+            
         }
 
-        if(!$this->jurnal->validate()){
+        
+        if(!$this->jurnal->validateJurnalCreation()){
             $this->load->view('template',compact('content','title','action','data','titleTag'));
             return;
         }
         
-        $this->jurnal->insertJurnal($data);
         $this->session->set_flashdata('berhasil','Data Jurnal Berhasil Di Tambahkan');
         redirect('jurnal_umum');    
     }
@@ -201,7 +210,7 @@ class User extends CI_Controller{
 
     public function editJurnal(){
         $title = 'Edit'; $content = 'user/form_jurnal'; $action = 'jurnal_umum/edit'; $tgl_input = date('Y-m-d H:i:s'); $id_user = $this->session->userdata('id'); $titleTag = 'Edit Jurnal Umum';
-
+        
         if($_POST){
             $data = (object) [
                 'id_user'=>$id_user,
