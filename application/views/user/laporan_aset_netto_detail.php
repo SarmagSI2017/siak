@@ -37,7 +37,6 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">
-                                        <!-- No. Akun -->
                                     </th>
                                     <th scope="col">Nilai</th>
                                     <th scope="col">Keterangan</th>
@@ -53,7 +52,7 @@
 
                             ?>                            
                             <td>Saldo Awal</td>
-                            <td><?= 'Rp. '.number_format(abs($totalKas),0,',','.') ?></td>
+                            <td><?= 'Rp. '.number_format($tanpaPembatasan,0,',','.') ?></td>
                             <td></td>
                             <?php
 
@@ -64,7 +63,7 @@
 								$s=0;
 								$deb = $saldo[$i];
 								?>
-                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "4") {?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,2) == "4-") {?>
                                 
                                     
                                     <?php
@@ -72,7 +71,9 @@
 											$hasil += $deb[$j]->saldo;
 										endfor;
 										$totalPendapatan += $hasil;
+
 									?>
+
 
                                     
                                 
@@ -89,7 +90,7 @@
 								$s=0;
 								$deb = $saldo[$i];
 								?>
-                                <?php if( substr($data[$i][$s]->no_reff,0,1) == "5") {?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,2) == "5-") {?>
                                
                                     <?php
 										for($j=0;$j<count($data[$i]);$j++):
@@ -120,10 +121,11 @@
                             <tr style="background-color:aquamarine;">
                                 <td>Total</td>
                                 <?php
-                                if($surplus+$totalKas>=0){?>
-                                <td><?= 'Rp. '.number_format(abs($surplus+$totalKas),0,',','.') ?></td>
+                                if($surplus+$tanpaPembatasan>=0){?>
+                                <td><?= 'Rp. '.number_format(abs($surplus+$tanpaPembatasan),0,',','.') ?></td>
                                 <?php } else{?>
-                                <td>(<?= 'Rp. '.number_format(abs($surplus+$totalKas),0,',','.') ?>)</td>
+                                <td>(<?= 'Rp. '.number_format(abs($surplus+$tanpaPembatasan),0,',','.') ?>)</td>
+                                
                                 <?php } ?>
                                 <td></td>
                             </tr>
@@ -134,20 +136,85 @@
                                 <td></td>
                                 <td></td>
                             </tr>
-
+                            <?php $surplus=0; ?>
                             <tr>
                                 <td>Saldo Awal</td>
-                                <td><?= 'Rp. '.number_format(0,0,',','.') ?></td>
+                                <td><?= 'Rp. '.number_format($denganPembatasan,0,',','.') ?></td>
                                 <td></td>
                             </tr>
+                            
+                            <?php
+
+                            $totalPendapatan=0;
+							$totalBeban=0;
+							for($i=0;$i<$jumlah;$i++) :
+								$a++;
+								$s=0;
+								$deb = $saldo[$i];
+								?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,3) == "6-1" ) {?>
+                                
+                                    
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalPendapatan += $hasil;
+									?>
+
+                                    
+                                
+                                <?php } ?>
+                                <?php endfor ; $hasil = 0;?>
+                                
+                                <!-- END OF PENDAPATAN -->
+
+                                <!-- BEBAN -->
+
+                                <?php
+							for($i=0;$i<$jumlah;$i++) :
+								$a++;
+								$s=0;
+								$deb = $saldo[$i];
+								?>
+                                <?php if( substr($data[$i][$s]->no_reff,0,3) == "6-2") {?>
+                               
+                                    <?php
+										for($j=0;$j<count($data[$i]);$j++):
+											$hasil += $deb[$j]->saldo;
+										endfor;
+										$totalBeban += $hasil;
+									?>
+
+                                <?php } ?>
+                                <?php endfor ?>
+                                <tr>
+                                    <?php 
+									$surplus = $totalPendapatan - $totalBeban;
+
+									if($surplus > 0){ ?>
+                                    <td>Surplus(Defisit)</td>
+
+                                    <td><?= 'Rp. '.number_format(abs($surplus),0,',','.') ?></td>
+                                    <?php }else{ ?>
+                                    <td>Surplus(Defisit)</td>
+
+                                    <td>(<?= 'Rp. '.number_format(abs($surplus),0,',','.') ?>)</td>
+                                    <?php } ?>
+                                    <td></td>
+                                </tr>
+
                             <tr>
-                                <td>Surplus(Defisit)</td>
-                                <td><?= 'Rp. '.number_format(0,0,',','.') ?></td>
-                                <td></td>
                             </tr>
                             <tr style="background-color:aquamarine;">
                                 <td>Total</td>
-                                <td><?= 'Rp. '.number_format(0,0,',','.') ?></td>
+                                <?php
+                                if($surplus+$tanpaPembatasan>=0){?>
+                                <td><?= 'Rp. '.number_format(abs($surplus+$denganPembatasan),0,',','.') ?></td>
+                                <?php } else{?>
+                                <td>(<?= 'Rp. '.number_format(abs($surplus+$denganPembatasan),0,',','.') ?>)</td>
+                                
+                                <?php } ?>
                                 <td></td>
                             </tr>
 

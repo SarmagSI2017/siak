@@ -65,7 +65,7 @@ class Jurnal_model extends CI_Model{
     }
 
     public function getJurnalByNoReffMonthYear($noReff,$bulan,$tahun){
-        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,akun_temp.nama_reff,transaksi_temp.no_reff,transaksi_temp.jenis_saldo,transaksi_temp.saldo,transaksi_temp.tgl_input,akun_temp.keterangan')
+        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,akun_temp.nama_reff,transaksi_temp.no_reff,transaksi_temp.jenis_saldo,transaksi_temp.saldo,transaksi_temp.tgl_input,akun_temp.keterangan,akun_temp.induk')
                     ->from($this->table)            
                     ->where('transaksi_temp.no_reff',$noReff)
                     ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
@@ -107,6 +107,10 @@ class Jurnal_model extends CI_Model{
                     ->order_by('tgl_transaksi','ASC')
                     ->get()
                     ->result();
+                    
+                    
+        // return $this->db->query($query)
+        //             ->result();
     }
 
     public function getJurnalJoinAkun(){
@@ -149,6 +153,76 @@ class Jurnal_model extends CI_Model{
                         ->where('jenis_saldo',$jenis_saldo)
                         ->get()
                         ->row();
+    }
+
+    public function getLastNetoTanpaPembatasan($bulan,$tahun){
+        $where=$tahun.'-'.$bulan.'-01';
+        $total=0;
+        $pendapatan = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','4-')
+                    ->where('transaksi_temp.tgl_transaksi <',$where)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->group_by('akun_temp.nama_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+        $beban = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','5-')
+                    ->where('transaksi_temp.tgl_transaksi <',$where)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->group_by('akun_temp.nama_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+        
+        foreach($pendapatan as $temp)
+            {
+                if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+                else $total-=$temp->saldo;
+            }
+        foreach($beban as $temp)
+            {
+                if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total-=$temp->saldo;
+                else $total+=$temp->saldo;
+            }
+        return $total;
+    }
+
+    public function getLastNetoDenganPembatasan($bulan,$tahun){
+        $where=$tahun.'-'.$bulan.'-01';
+        $total=0;
+        $pendapatan = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','6-1')
+                    ->where('transaksi_temp.tgl_transaksi <',$where)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->group_by('akun_temp.nama_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+        $beban = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','6-2')
+                    ->where('transaksi_temp.tgl_transaksi <',$where)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->group_by('akun_temp.nama_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+        
+        foreach($pendapatan as $temp)
+            {
+                if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+                else $total-=$temp->saldo;
+            }
+        foreach($beban as $temp)
+            {
+                if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total-=$temp->saldo;
+                else $total+=$temp->saldo;
+            }
+        return $total;
     }
 
     public function insertJurnal($data){

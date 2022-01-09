@@ -38,7 +38,7 @@
                       <div class="row mb-4">
                         <div class="col">
                           <label for="no_reff">Nama Akun</label>
-                          <?= form_dropdown('no_reff[]', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
+                          <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
                           <?= form_error('no_reff') ?>
                         </div>
                         <div class="col">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col">
                           <label for="keterangan">Keterangan</label>
-                          <input type="text" name="keterangan[]" class="form-control saldo" id="keterangan" value="">
+                          <input type="text" name="keterangan[]" class="form-control saldo" id="keterangan" value="<?= $data->Keterangan ?>" >
                           <?= form_error('saldo') ?>
                         </div>
                         <div class="col">
@@ -85,7 +85,7 @@
                       <div class="row mb-4">
                         <div class="col">
                           <label for="no_reff">Nama Akun</label>
-                          <?= form_dropdown('no_reff[]', getDropdownList('akun', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
+                          <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
                           <?= form_error('no_reff') ?>
                         </div>
                         <div class="col">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col">
                           <label for="keterangan">Keterangan</label>
-                          <input type="text" name="keterangan[]" class="form-control saldo" id="keterangan" value="">
+                          <input type="text" name="keterangan[]" class="form-control saldo" id="keterangan" value="<?= $data->Keterangan ?>">
                           <?= form_error('saldo') ?>
                         </div>
                         <div class="col">

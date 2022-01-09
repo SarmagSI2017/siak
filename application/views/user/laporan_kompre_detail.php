@@ -47,9 +47,11 @@
                                 </th>
                                 <th scope="col">Nama Akun</th>
                                 <th scope="col">Nilai</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
+                            
                             <!-- PENDAPATAN -->
                             <tr>
                                 <td>Pendapatan</td>
@@ -64,10 +66,10 @@
                                 $s = 0;
                                 $deb = $saldo[$i];
                             ?>
-                                <?php if (substr($data[$i][$s]->no_reff, 0, 1) == "4") { ?>
+                                <?php if (substr($data[$i][$s]->no_reff, 0, 2) == "4-") { ?>
                                     <tr>
                                         <td>
-                                            <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                            <!-- <?= $header[$i][$s] ?> -->
                                         </td>
                                         <td>
                                             <?= $data[$i][$s]->nama_reff ?>
@@ -103,10 +105,11 @@
                                 $s = 0;
                                 $deb = $saldo[$i];
                             ?>
-                                <?php if (substr($data[$i][$s]->no_reff, 0, 1) == "5") { ?>
+                                <?php if (substr($data[$i][$s]->no_reff, 0, 2) == "5-") { ?>
                                     <tr>
                                         <td>
                                             <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                            
                                         </td>
                                         <td>
                                             <?= $data[$i][$s]->nama_reff ?>

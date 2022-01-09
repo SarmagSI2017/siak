@@ -29,6 +29,10 @@ class Akun_model extends CI_Model{
         return $this->db->where('no_reff',$str)->get($this->table)->num_rows();
     }
 
+    public function countAkunIndukByNoReff($str){
+        return $this->db->where('induk',$str)->get($this->table)->num_rows();
+    }
+
     public function getAkunByNo($noReff){
         return $this->db->where('no_reff',$noReff)->get($this->table)->row();
     }
@@ -78,16 +82,22 @@ class Akun_model extends CI_Model{
 	 * @return mixed
 	 */
 	public function getAkunLRByMonthYear($bulan,$tahun){
-		return $this->db->select('akun_temp.no_reff,akun_temp.nama_reff,akun_temp.keterangan,transaksi_temp.tgl_transaksi')
+        $query= "SELECT `akun_temp`.`no_reff`, `akun_temp`.`nama_reff`, `akun_temp`.`keterangan`, `transaksi_temp`.`tgl_transaksi` FROM `akun_temp` JOIN `transaksi_temp` ON `transaksi_temp`.`no_reff` = `akun_temp`.`no_reff` 
+        WHERE month(transaksi_temp.tgl_transaksi) = ".$bulan." AND year(transaksi_temp.tgl_transaksi) = ".$tahun." AND (akun_temp.no_reff LIKE '4-%' OR akun_temp.no_reff LIKE '5-%' OR akun_temp.no_reff LIKE '6-%')  
+        GROUP BY `akun_temp`.`nama_reff` ORDER BY `akun_temp`.`no_reff`";
+		return $this->db
+            // ->select('akun_temp.no_reff,akun_temp.nama_reff,akun_temp.keterangan,transaksi_temp.tgl_transaksi')
 			->from($this->table)
-			->where('month(transaksi_temp.tgl_transaksi)',$bulan)
-			->where('year(transaksi_temp.tgl_transaksi)',$tahun)
-			->like('transaksi_temp.no_reff','4-')
-            ->or_like('transaksi_temp.no_reff','5-')
-			->join('transaksi_temp','transaksi_temp.no_reff = akun_temp.no_reff')
-			->group_by('akun_temp.nama_reff')
-			->order_by('akun_temp.no_reff')
-			->get()
+			->query($query)
+			// ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+			// ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+			// ->like('transaksi_temp.no_reff','4-')
+            // ->or_like('transaksi_temp.no_reff','5-')
+            // ->or_like('transaksi_temp.no_reff','6-')
+			// ->join('transaksi_temp','transaksi_temp .no_reff = akun_temp.no_reff')
+			// ->group_by('akun_temp.nama_reff')
+			// ->order_by('akun_temp.no_reff')
+			// ->get()
 			->result();
 	}
 

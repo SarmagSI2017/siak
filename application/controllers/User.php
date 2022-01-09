@@ -178,7 +178,8 @@ class User extends CI_Controller{
                     'tgl_input'=>$tgl_input,
                     'tgl_transaksi'=>$this->input->post('tgl_transaksi',true),
                     'jenis_saldo'=>$this->input->post('jenis_saldo[' . $i . ']',true),
-                    'saldo'=>$this->input->post('saldo[' . $i . ']',true)
+                    'saldo'=>$this->input->post('saldo[' . $i . ']',true),
+                    'keterangan'=>$this->input->post('keterangan[' . $i . ']',true)
                 ];
                 $this->jurnal->insertJurnal($data);
             }
@@ -218,7 +219,8 @@ class User extends CI_Controller{
                 'tgl_input'=>$tgl_input,
                 'tgl_transaksi'=>$this->input->post('tgl_transaksi',true),
                 'jenis_saldo'=>$this->input->post('jenis_saldo',true),
-                'saldo'=>$this->input->post('saldo',true)
+                'saldo'=>$this->input->post('saldo',true),
+                'keterangan'=>$this->input->post('keterangan',true)
             ];
             $id = $this->input->post('id',true);
         }
@@ -272,10 +274,12 @@ class User extends CI_Controller{
             $this->session->set_flashdata('dataNull','Data Buku Besar Dengan Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
             redirect('buku_besar');
         }
-
         $jumlah = count($data);
 
         $this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo'));
+        
+
+        
     }
 
     public function neracaSaldo(){
@@ -434,8 +438,7 @@ class User extends CI_Controller{
 		$tahun = $this->input->post('tahun',true);
 
 		$titleTag = 'Laporan Komprehensif | '.bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
-        $periode= bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
-
+        
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_kompre');
 		}
@@ -443,20 +446,28 @@ class User extends CI_Controller{
 		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
 		$data = null;
 		$saldo = null;
+        $periode= bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+
+        $kas = $this->jurnal->getLastMonthCash($bulan,$tahun); //jangan dihapus "i have no fuckin idea why deleting this shit causing SQL error"
+
 
 		foreach($dataAkun as $row){
 			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
 			$saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
+            $header[] = (array) $this->akun->countAkunIndukByNoReff($row->no_reff);
 		}
+
+
+        $jumlah = count($data);
 
 		if($data == null || $saldo == null){
 			$this->session->set_flashdata('dataNull','Laporan Laba Rugi pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
 			redirect('laporan_kompre');
 		}
 
-		$jumlah = count($data);
+		
 
-		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo', 'periode'));
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo', 'periode','header'));
 
 	}
 
@@ -495,7 +506,10 @@ class User extends CI_Controller{
 		$saldo = null;
         $periode = bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
 
-        $kas = $this->jurnal->getLastMonthCash($bulan,$tahun);
+        $kas = $this->jurnal->getLastMonthCash($bulan,$tahun);    //jangan dihapus "i have no fuckin idea why deleting this shit causing SQL error"
+
+        $tanpaPembatasan =$this->jurnal->getLastNetoTanpaPembatasan($bulan,$tahun);
+        $denganPembatasan =$this->jurnal->getLastNetoDenganPembatasan($bulan,$tahun);
 
         
 
@@ -507,20 +521,18 @@ class User extends CI_Controller{
 			$saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
 		}
 
-        foreach($kas as $temp)
-        {
-            if($temp->jenis_saldo=="debit") $totalKas+=$temp->saldo;
-            else $totalKas-=$temp->saldo;
-        }
+        $jumlah = count($data);
 
 		if($data == null || $saldo == null){
 			$this->session->set_flashdata('dataNull','Laporan Aset Netto pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
 			redirect('laporan_aset_netto');
 		}
 
-		$jumlah = count($data);
+        
 
-		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo','totalKas','periode'));
+		
+
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo','periode','tanpaPembatasan','denganPembatasan'));
 
 	}
 
