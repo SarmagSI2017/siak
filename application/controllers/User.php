@@ -371,13 +371,19 @@ class User extends CI_Controller{
 	 * Function to Render Laporan Posisi Keuangan Template
 	 * @return void
 	 */
-	public function laporan_pk() {
-		$titleTag = 'Laporan Posisi Keuangan';
+    public function laporan_pk() {
+        $titleTag = 'Laporan Posisi Keuangan';
 		$content = 'user/laporan_pk';
 		$listJurnal = $this->jurnal->getJurnalByYearAndMonth();
 		$tahun = $this->jurnal->getJurnalByYear();
 		$this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
 	}
+    
+        /**
+         * TODO: 
+         * - Adjust with New DB
+         * - Adjust to ISAK 35
+         */
 
 	public function laporanPKDetail() {
 		$content = 'user/laporan_pk_detail';
@@ -392,13 +398,25 @@ class User extends CI_Controller{
 		}
 
 		$dataAkun = $this->akun->getAkunPKByMonthYear($bulan,$tahun);
+        $dataAkunAN = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
 		$data = null;
+        $dataAN = null;
 		$saldo = null;
+        $saldoAN = null;
         $periode= bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+        $kas = $this->jurnal->getLastMonthCash($bulan,$tahun); //jangan dihapus "i have no fuckin idea why deleting this shit causing SQL error"
+
+        $tanpaPembatasan =$this->jurnal->getLastNetoTanpaPembatasan($bulan,$tahun);
+        $denganPembatasan =$this->jurnal->getLastNetoDenganPembatasan($bulan,$tahun);
 
 		foreach($dataAkun as $row){
 			$data[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
 			$saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
+		}
+
+        foreach($dataAkunAN as $row){
+			$dataAN[] = (array) $this->jurnal->getJurnalByNoReffMonthYear($row->no_reff,$bulan,$tahun);
+			$saldoAN[] = (array) $this->jurnal->getJurnalByNoReffSaldoMonthYear($row->no_reff,$bulan,$tahun);
 		}
 
 		if($data == null || $saldo == null){
@@ -407,8 +425,55 @@ class User extends CI_Controller{
 		}
 
 		$jumlah = count($data);
+        $jumlahAN = count($dataAN);
 
-		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo','periode'));
+        $totalTanpaPembatasan = 0;
+        $totalDenganPembatasan = 0;
+        $totalPendapatan = 0;
+        $totalBeban = 0;
+        $totalPendapatanBatas = 0;
+        $totalBebanBatas = 0;
+        $hasilPendapatanPembatasan = 0;
+        $hasilBebanPembatasan = 0;
+        $hasilPendapatanTanpaPembatasan = 0;
+        $hasilBebanTanpaPembatasan = 0;
+        
+        for($i=0; $i<$jumlahAN; $i++) {
+            $s = 0;
+            $deb = $saldoAN[$i];
+            if (substr($dataAN[$i][$s]->no_reff,0,2) == "4-") {
+                for($j=0;$j<count($dataAN[$i]);$j++) {
+                    $hasilPendapatanTanpaPembatasan += $deb[$j]->saldo;
+                }
+                $totalPendapatan += $hasilPendapatanTanpaPembatasan;
+            }
+
+            if (substr($dataAN[$i][$s]->no_reff,0,2) == "5-") {
+                for($j=0;$j<count($dataAN[$i]);$j++) {
+                    $hasilBebanTanpaPembatasan += $deb[$j]->saldo;
+                }
+                $totalBeban += $hasilBebanTanpaPembatasan;
+            }
+            
+            if (substr($dataAN[$i][$s]->no_reff,0,3) == "6-1") {
+                for($j=0;$j<count($dataAN[$i]);$j++) {
+                    $hasilPendapatanPembatasan += $deb[$j]->saldo;
+                }
+                $totalPendapatanBatas += $hasilPendapatanPembatasan;
+            }
+            
+            if (substr($dataAN[$i][$s]->no_reff,0,3) == "6-2") {
+                for($j=0;$j<count($dataAN[$i]);$j++) {
+                    $hasilBebanPembatasan += $deb[$j]->saldo;
+                }
+                $totalBebanBatas += $hasilBebanPembatasan;
+            }
+        }
+
+        $totalTanpaPembatasan = $tanpaPembatasan + ($totalPendapatan - $totalBeban);
+        $totalDenganPembatasan = $denganPembatasan + ($totalPendapatanBatas - $totalBebanBatas);
+
+		$this->load->view('template',compact('content','titleTag','dataAkun','data','jumlah','saldo','periode','totalTanpaPembatasan','totalDenganPembatasan'));
 
 	}
 

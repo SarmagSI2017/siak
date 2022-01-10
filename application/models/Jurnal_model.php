@@ -85,6 +85,19 @@ class Jurnal_model extends CI_Model{
                     ->get()
                     ->result();
     }
+
+    public function getLastMonthSmallCash($bulan,$tahun) {
+        $date=$tahun.'-'.$bulan.'-01';
+        return $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.tgl_transaksi,transaksi_temp.no_reff,transaksi_temp.jenis_saldo,transaksi_temp.saldo,transaksi_temp.tgl_input,akun_temp.nama_reff,akun_temp.keterangan,akun_temp.induk')
+                    ->from($this->table)
+                    ->like('transaksi_temp.no_reff','1-11')
+                    ->where('month(transaksi_temp.tgl_transaksi)',$bulan)
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff=akun_temp.no_reff')
+                    ->order_by('tgl_transaksi','ASC')
+                    ->get()
+                    ->result();
+    }
     
 
     public function getJurnalByNoReffSaldo($noReff){

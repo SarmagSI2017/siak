@@ -147,6 +147,7 @@
 
                             $totalPendapatan=0;
 							$totalBeban=0;
+                            $hasil=0;
 							for($i=0;$i<$jumlah;$i++) :
 								$a++;
 								$s=0;
