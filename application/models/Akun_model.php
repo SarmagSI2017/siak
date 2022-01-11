@@ -4,9 +4,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Akun_model extends CI_Model{
     // private $table = 'akun';
     private $table = 'akun_temp';
+    private $tableunsur = 'unsur_laporan_keuangan';
+    private $tablesubunsur = 'akun_temp';
 
     public function getAkun(){
         return $this->db->get($this->table)->result();
+    }
+    public function getUnsurAkun(){
+        return $this->db->get($this->tableunsur)->result();
+    }
+    public function getSubUnsurAkun(){
+        return $this->db->get($this->tablesubunsur)->result();
+    }
+    public function getAkunByUnsur($no_unsur){
+        // return $this->db->where('no_unsur',$no_unsur)->get($this->tablesubunsur)->row();
+        return $this->db->select('no_reff,nama_reff,saldo_normal,unsur_laporan_keuangan')
+        ->where('unsur_laporan_keuangan',$no_unsur)
+        ->from($this->tablesubunsur)
+        ->get()
+        ->result();
     }
 
     public function getAkunByMonthYear($bulan,$tahun){
