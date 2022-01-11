@@ -378,12 +378,6 @@ class User extends CI_Controller{
 		$tahun = $this->jurnal->getJurnalByYear();
 		$this->load->view('template',compact('content','listJurnal','titleTag','tahun'));
 	}
-    
-        /**
-         * TODO: 
-         * - Adjust with New DB
-         * - Adjust to ISAK 35
-         */
 
 	public function laporanPKDetail() {
 		$content = 'user/laporan_pk_detail';
