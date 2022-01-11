@@ -32,8 +32,8 @@
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">
               <tr>
-                <th>No.</th>
-                <th class="text-center">Nama Unsur</th>
+                <th>No. Reff</th>
+                <th class="text-center">Nama Akun</th>
                 <th class="text-center">Saldo Normal</th>
                 <th class="text-center">Aksi</th>
               </tr>
