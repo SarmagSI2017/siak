@@ -615,7 +615,7 @@ class User extends CI_Controller{
             $utangLancar = $this->jurnal->getSumCurrentDebt(date('Y', strtotime("-".$i." years")));
             $kasDanSetaraKas = $this->jurnal->getSumCashAndEquivalent(date('Y', strtotime("-".$i." years")));
             $totalAset = $this->jurnal->getSumAllAssets(date('Y', strtotime("-".$i." years")));
-            $penjualan = $this->jurnal->getSumSales(date('Y', strtotime("-".$i." years")));
+            // $penjualan = $this->jurnal->getSumSales(date('Y', strtotime("-".$i." years")));
             
             // Rasio Likuiditas
             // Quick Ratio
