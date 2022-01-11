@@ -238,6 +238,107 @@ class Jurnal_model extends CI_Model{
         return $total;
     }
 
+    public function getSumCurrentAssets($tahun) {
+        $total = 0;
+        $currAssets = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','1-')
+                    ->not_like('transaksi_temp.no_reff','1-2000')
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+
+        foreach($currAssets as $temp)
+        {
+            if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+            else $total-=$temp->saldo;
+        }
+
+        return $total;
+    }
+
+    public function getSumStock($tahun) {
+        $total = 0;
+        $stock = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->where('transaksi_temp.no_reff','1-2000')
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+
+        foreach($stock as $temp)
+        {
+            if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+            else $total-=$temp->saldo;
+        }
+
+        return $total;
+    }
+
+    public function getSumCurrentDebt($tahun) {
+        $total = 0;
+        $currDebt = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','2-1')
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+
+        foreach($currDebt as $temp)
+        {
+            if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+            else $total-=$temp->saldo;
+        }
+
+        return $total;
+    }
+
+    public function getSumCashAndEquivalent($tahun) {
+        $total = 0;
+        $cash = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','1-1')
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+
+        foreach($cash as $temp)
+        {
+            if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+            else $total-=$temp->saldo;
+        }
+
+        return $total;
+    }
+
+    public function getSumAllAssets($tahun) {
+        $total = 0;
+        $assets = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','1-')
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+
+        foreach($assets as $temp)
+        {
+            if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+            else $total-=$temp->saldo;
+        }
+
+        return $total;
+    }
+
     public function insertJurnal($data){
         return $this->db->insert($this->table,$data);
     }

@@ -99,6 +99,12 @@
                     <span class="nav-link-text">Laporan Aset Neto</span>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('laporan_analisis_rasio') ?>">
+                    <i class="fas fa-file-alt text-yellow"></i>
+                    <span class="nav-link-text">Laporan Analisis Rasio</span>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </li>

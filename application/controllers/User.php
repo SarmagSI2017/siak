@@ -596,6 +596,51 @@ class User extends CI_Controller{
 	}
 
 
+    /*
+	 * Start Laporan Analisis Rasio Section
+	 * */
+
+    public function laporan_analisis_rasio() {
+        $titleTag = 'Laporan Analisis Rasio';
+		$content = 'user/laporan_analisis_rasio';
+        $periode = date('Y', strtotime('-5 years')).' - '.date('Y', strtotime('-1 years'));
+        
+        
+        $dataQR = null;
+        $dataCash = null;
+
+        for($i=5; $i>=1; $i--) {
+            $aktivaLancar = $this->jurnal->getSumCurrentAssets(date('Y', strtotime("-".$i." years")));
+            $persediaan = $this->jurnal->getSumStock(date('Y', strtotime("-".$i." years")));
+            $utangLancar = $this->jurnal->getSumCurrentDebt(date('Y', strtotime("-".$i." years")));
+            $kasDanSetaraKas = $this->jurnal->getSumCashAndEquivalent(date('Y', strtotime("-".$i." years")));
+            $totalAset = $this->jurnal->getSumAllAssets(date('Y', strtotime("-".$i." years")));
+            $penjualan = $this->jurnal->getSumSales(date('Y', strtotime("-".$i." years")));
+            
+            // Rasio Likuiditas
+            // Quick Ratio
+            if ($utangLancar == 0) $dataQR[$i] = 0;
+            else $dataQR[$i] = ($aktivaLancar-$persediaan)/$utangLancar;
+
+            // Rasio Profitabilitas
+            if ($utangLancar == 0) $dataCash[$i] = 0;
+            else $dataCash[$i] = $kasDanSetaraKas/$utangLancar;
+
+            // Profitabilitas
+            // Net Profit Margin
+
+
+            // Return on Total Assets
+        }
+
+
+		$this->load->view('template',compact('content','titleTag','periode','dataQR','dataCash'));
+    }
+
+    /*
+	 * End Laporan Analisis Rasio Section
+	 * */
+
     public function logout(){
         $this->user->logout();
         redirect('');
