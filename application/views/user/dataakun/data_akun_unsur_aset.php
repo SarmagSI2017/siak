@@ -55,7 +55,7 @@
                   </td>
                   <td class="d-flex justify-content-center">
                     <a href="<?= base_url() ?>" class="btn btn-primary mb-4">Detail</a>
-                    <a href="<?= base_url() ?>" class="btn btn-warning mb-4">Edit</a>
+                    <a href="<?= base_url('data_akun/edit/'.$row->no_reff) ?>" class="btn btn-warning mb-4">Edit</a>
                     
                   </td>
                 </tr>

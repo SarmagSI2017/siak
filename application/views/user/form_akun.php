@@ -20,10 +20,18 @@
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
-                            <label><h4><b>Sub Header Akun</b></h4></label>
-                            <select class="form-control" name="sub_header" id="sub_header" onchange="addData()" required="required">
+                            <label><h4><b>Unsur Akun</b></h4></label>
+                            <select class="form-control" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" onchange="addData()" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?> >
                               <option disabled selected>-- Daftar Sub Header --</option>
-                              <option value="<?= $data->no_reff ?>" ><?= $data->nama_reff ?></option>
+                              <!-- <option value="<?= $data->no_reff ?>" ><?= $data->nama_reff ?></option> -->
+                              <?php
+                                foreach ($dataunsur as $row) :
+                              ?>
+                                <?php if($data->unsur_laporan_keuangan == $row->no_unsur) {?>
+                                  <option selected value="<?= $row->no_unsur ?>"><?= $row->nama_unsur ?></option>
+                                <?php }else {?>
+                                  <option value="<?= $row->no_unsur ?>"><?= $row->nama_unsur ?></option>
+                              <?php }endforeach; ?>
                             </select>
                           </div>
                         </div>
@@ -44,18 +52,57 @@
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label><h4><b>Saldo Normal</b></h4></label>
-                            <select class="form-control" name="saldo_normal" id="saldo_normal" required="required">
+                            <select class="form-control" name="saldo_normal" id="saldo_normal" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?>>
                               <option disabled selected>-- Pilih Saldo Normal --</option>
-                              <option value="Debit" >Debit</option>
-                              <option value="Kredit" >Kredit</option>
+                              <?php
+                                if ($title == 'Edit') {
+                              ?>
+                                <option <?php if ($data->saldo_normal == 'Debit') { echo "selected";} ?> value="Debit" >Debit</option>
+                                <option <?php if ($data->saldo_normal == 'Kredit') { echo "selected";} ?> value="Kredit" >Kredit</option>
+                              <?php
+                                } else {
+                              ?>
+                                <option value="Debit" >Debit</option>
+                                <option value="Kredit" >Kredit</option>
+                              <?php
+                                }
+                              ?>
                             </select>
                           </div>
                         </div>
                       </div>
+
+                      <div class="form-group">
+                        <label for="atomic"><h4><b>Transaksi</b></h4></label>
+                        <p><?= form_error('is_atomic') ?></p>
+                        <!-- <input type="checkbox" name="is_atomic" id="is_atomic" class="form-control mb-3" <?php if ($title == 'Edit') { ?> value="<?= $data->is_atomic ?>" <?php } else { ?> value="" <?php } ?> /> -->
+
+                        <?php 
+                        if ($title == 'Edit') {
+                          echo form_checkbox(array(
+                            'name' => 'is_atomic',
+                            'id' => 'is_atomic',
+                            'class' => 'form-control mb-3',
+                            'value' => ($data->is_atomic),
+                            'checked' => (($data->is_atomic) && ($data->is_atomic)== 1 )
+                        ));
+                        }
+                        else{
+                          echo form_checkbox(array(
+                            'name' => 'is_atomic',
+                            'id' => 'is_atomic',
+                            'class' => 'form-control mb-3',
+                            'value' => '1',
+                            'checked' => ($this->input->post('is_atomic') && $this->input->post('is_atomic') == 1 )
+                        ));
+                        }
+                        ?>
+                      </div>
+
                       <div class="form-group">
                         <label for="keterangan">Keterangan</label>
-                        <p><?= form_error('keterangan') ?></p>
-                        <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control mb-3"><?= $data->keterangan ?></textarea>
+                        <!-- <p><?= form_error('keterangan') ?></p> -->
+                        <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control mb-3" required=false value=""><?= $data->keterangan ?></textarea>
                       </div>
                       <div class="col-12 mt-4">
                         <button type="submit" class="btn-primary btn" id="button_akun"><?= $title ?></button>

@@ -69,6 +69,7 @@ class Akun extends CI_Controller
     $titleTag = 'Tambah Data Akun';
     $action = 'data_akun/tambah';
     $content = 'user/form_akun';
+    $dataunsur = $this->akun->getUnsurAkun();
 
     if (!$_POST) {
       $data = (object) $this->akun->getDefaultValues();
@@ -78,7 +79,7 @@ class Akun extends CI_Controller
     }
 
     if (!$this->akun->validate($title)) {
-      $this->load->view('template', compact('content', 'title', 'action', 'data', 'titleTag'));
+      $this->load->view('template', compact('content', 'title', 'action', 'data', 'titleTag', 'dataunsur'));
       return;
     }
 
@@ -93,6 +94,7 @@ class Akun extends CI_Controller
     $titleTag = 'Edit Data Akun';
     $action = 'data_akun/edit/' . $no_reff;
     $content = 'user/form_akun';
+    $dataunsur = $this->akun->getUnsurAkun();
 
     if (!$_POST) {
       $data = (object) $this->akun->getAkunByNo($no_reff);
@@ -102,7 +104,7 @@ class Akun extends CI_Controller
     }
 
     if (!$this->akun->validate($title)) {
-      $this->load->view('template', compact('content', 'title', 'action', 'data', 'titleTag'));
+      $this->load->view('template', compact('content', 'title', 'action', 'data', 'titleTag','dataunsur'));
       return;
     }
 

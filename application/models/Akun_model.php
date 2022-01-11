@@ -54,10 +54,40 @@ class Akun_model extends CI_Model{
     }
 
     public function insertAkun($data){
-        return $this->db->insert($this->table,$data);
+        if($this->input->post('is_atomic') == NULL){
+            $atomic = 0;
+        }else{
+            $atomic = 1;
+        }
+        $data = array(  
+                'no_reff'   => $this->input->post('unsur_laporan_keuangan').'-'.$this->input->post('no_reff'),
+                'nama_reff' => $this->input->post('nama_reff'),
+                'saldo_normal' => $this->input->post('saldo_normal'),
+                'keterangan' => $this->input->post('keterangan'),
+                'unsur_laporan_keuangan' => $this->input->post('unsur_laporan_keuangan'),
+                'is_atomic' => $atomic
+                );  
+        //insert data into database table.  
+        return $this->db->insert($this->table,$data);  
+        //return $this->db->insert($this->table,$data);
     }
 
     public function updateAkun($noReff,$data){
+        
+        if($this->input->post('is_atomic') == NULL){
+            $atomic = 0;
+        }else{
+            $atomic = 1;
+        }
+        $data = array(  
+            'no_reff'   =>$this->input->post('no_reff'),
+            'nama_reff' => $this->input->post('nama_reff'),
+            'saldo_normal' => $this->input->post('saldo_normal'),
+            'keterangan' => $this->input->post('keterangan'),
+            'unsur_laporan_keuangan' => $this->input->post('unsur_laporan_keuangan'),
+            'is_atomic' => $atomic
+            ); 
+
         return $this->db->where('no_reff',$noReff)->update($this->table,$data);
     }
 

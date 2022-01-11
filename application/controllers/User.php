@@ -628,7 +628,7 @@ class User extends CI_Controller{
 
             // Profitabilitas
             // Net Profit Margin
-
+            
 
             // Return on Total Assets
         }
