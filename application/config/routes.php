@@ -58,8 +58,22 @@ $route['logout'] = 'user/logout';
 // DASHBOARD
 $route['dashboard'] = 'user/index';
 
-// DATA AKUN
-$route['data_akun'] = 'user/dataAkun';
+// // DATA AKUN
+// $route['data_akun'] = 'user/dataAkun';
+// $route['data_akun/tambah'] = 'user/createAkun';
+// // $route['data_akun/edit/(:num)'] = 'user/editAkun/$1';
+// $route['data_akun/edit/(:any)'] = 'user/editAkun/$1';
+// $route['data_akun/hapus'] = 'user/deleteAkun';
+
+// DATA AKUNNEW
+$route['data_akun'] = 'akun/dataAkunUnsur';
+$route['data_akun/tambah'] = 'user/createAkun';
+// $route['data_akun/edit/(:num)'] = 'user/editAkun/$1';
+$route['data_akun/edit/(:any)'] = 'user/editAkun/$1';
+$route['data_akun/hapus'] = 'user/deleteAkun';
+
+// DATA SUBAKUNNEW
+$route['data_akun/detailunsur/(:any)'] = 'akun/dataAkunSubUnsur/$1';
 $route['data_akun/tambah'] = 'user/createAkun';
 // $route['data_akun/edit/(:num)'] = 'user/editAkun/$1';
 $route['data_akun/edit/(:any)'] = 'user/editAkun/$1';
