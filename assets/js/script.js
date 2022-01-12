@@ -104,10 +104,22 @@ $(document).ready(function () {
 	$('.tab-nav').eq(0).addClass('active');
 	$('.tab-pane').eq(0).addClass('show active');
 
-	$('#no_reff').change(function () {
-		let nilai = $(this).val();
-		$('#reff').val(nilai);
-	});
+	// $('#no_reff').change(function () {
+	// 	let nilai = $(this).val();
+	// 	$('#reff').val(nilai);
+	// });
+	// $( "#no_reff" ).change(function() {
+	// 	let index = $( "#no_reff" ).index(this);
+	// 		$( "#reff" ).eq(index).val($(this).val());
+	// 	});
+
+
+	$(document).on("change", ".no_reff", function()  {
+		let index = $( ".no_reff" ).index( this );
+			$( ".reff" ).eq(index).val($(this).val());
+		});
+
+
 
 	$(window).on('load', function () {
 		let nilai = $('#no_reff').val();
