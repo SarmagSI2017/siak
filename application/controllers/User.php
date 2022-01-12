@@ -593,6 +593,8 @@ class User extends CI_Controller{
         
         $dataQR = null;
         $dataCash = null;
+        $dataNPM = null;
+        $dataROT = null;
 
         for($i=5; $i>=1; $i--) {
             $aktivaLancar = $this->jurnal->getSumCurrentAssets(date('Y', strtotime("-".$i." years")));
@@ -600,26 +602,29 @@ class User extends CI_Controller{
             $utangLancar = $this->jurnal->getSumCurrentDebt(date('Y', strtotime("-".$i." years")));
             $kasDanSetaraKas = $this->jurnal->getSumCashAndEquivalent(date('Y', strtotime("-".$i." years")));
             $totalAset = $this->jurnal->getSumAllAssets(date('Y', strtotime("-".$i." years")));
-            // $penjualan = $this->jurnal->getSumSales(date('Y', strtotime("-".$i." years")));
+            $penjualan = $this->jurnal->getSumSales(date('Y', strtotime("-".$i." years")));
+            $labaneto = $this->jurnal->getLabaNetto(date('Y', strtotime("-".$i." years")));
             
             // Rasio Likuiditas
             // Quick Ratio
             if ($utangLancar == 0) $dataQR[$i] = 0;
             else $dataQR[$i] = ($aktivaLancar-$persediaan)/$utangLancar;
-
+            
             // Rasio Profitabilitas
             if ($utangLancar == 0) $dataCash[$i] = 0;
             else $dataCash[$i] = $kasDanSetaraKas/$utangLancar;
 
             // Profitabilitas
             // Net Profit Margin
-            
+            if ($penjualan == 0 && $labaneto == 0) $dataNPM[$i] = 0;
+            else $dataNPM[$i] = $labaneto / $penjualan;
 
             // Return on Total Assets
+            if ($totalAset == 0 && $labaneto == 0) $dataROT[$i] = 0;
+            else $dataROT[$i] = $labaneto / $totalAset;
         }
 
-
-		$this->load->view('template',compact('content','titleTag','periode','dataQR','dataCash'));
+		$this->load->view('template',compact('content','titleTag','periode','dataQR','dataCash', 'dataNPM', 'dataROT'));
     }
 
     /*

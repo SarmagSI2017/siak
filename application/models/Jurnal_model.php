@@ -346,6 +346,53 @@ class Jurnal_model extends CI_Model{
         return $total;
     }
 
+    public function getSumSales($tahun) {
+        $total = 0;
+        $assets = $this->db->select('transaksi_temp.id_transaksi,transaksi_temp.jenis_saldo,transaksi_temp.saldo,akun_temp.saldo_normal')
+                    ->from($this->table)            
+                    ->like('transaksi_temp.no_reff','4-')
+                    ->where('year(transaksi_temp.tgl_transaksi)',$tahun)
+                    ->join('akun_temp','transaksi_temp.no_reff = akun_temp.no_reff')
+                    ->order_by('akun_temp.no_reff')
+                    ->get()
+                    ->result();
+
+        foreach($assets as $temp)
+        {
+            if(strtolower($temp->jenis_saldo)==strtolower($temp->saldo_normal)) $total+=$temp->saldo;
+            else $total-=$temp->saldo;
+        }
+
+        return $total;
+    }
+
+    public function getLabaNetto($tahun){
+        $total = 0;
+        $query = "
+        SELECT 
+(
+ (
+  (SELECT (CASE WHEN SUM(saldo) IS NULL THEN 0 ELSE SUM(saldo) END) as a FROM transaksi_temp WHERE no_reff LIKE '4-%' AND YEAR(tgl_transaksi) = '".$tahun."')- 
+  (SELECT (CASE WHEN SUM(saldo) IS NULL THEN 0 ELSE SUM(saldo) END) as a FROM transaksi_temp WHERE no_reff LIKE '5-%' AND YEAR(tgl_transaksi) = '".$tahun."')
+ )+
+ (
+  (SELECT (CASE WHEN SUM(saldo) IS NULL THEN 0 ELSE SUM(saldo) END) as a FROM transaksi_temp WHERE no_reff LIKE '6-1%' AND YEAR(tgl_transaksi) = '".$tahun."')- 
+  (SELECT (CASE WHEN SUM(saldo) IS NULL THEN 0 ELSE SUM(saldo) END) as a FROM transaksi_temp WHERE no_reff LIKE '6-2%' AND YEAR(tgl_transaksi) = '".$tahun."')
+ )
+)as a
+        ";
+        $result = $this->db->query($query)->result();
+
+        foreach($result as $row){
+            if($row->a == NULL){
+                return 0;
+            }else{
+                return $row->a;
+            }
+        }
+
+    }
+
     public function insertJurnal($data){
         return $this->db->insert($this->table,$data);
     }

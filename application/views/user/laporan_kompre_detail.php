@@ -230,7 +230,7 @@
                                 $s = 0;
                                 $deb = $saldo[$i];
                             ?>
-                                <?php if (substr($data[$i][$s]->no_reff, 0, 2) == "6-2") { ?>
+                                <?php if (substr($data[$i][$s]->no_reff, 0, 3) == "6-2") { ?>
                                     <tr>
                                         <td>
                                             <!-- <?= $data[$i][$s]->no_reff ?> -->

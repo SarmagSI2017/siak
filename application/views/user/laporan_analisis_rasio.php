@@ -12,6 +12,7 @@
     <div class="row">
         <div class="col">
             <div class="card">
+                
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col d-flex justify-content-center">
@@ -58,7 +59,7 @@
                                     <?php 
                                             for($i=5;$i>=1;$i--):
                                         ?>
-                                <td scope="col" class="text-center"><?= $dataQR[$i] ?></td>
+                                <td scope="col" class="text-center"><?php echo number_format($dataQR[$i], 2); ?></td>
                                 <?php
                                             endfor;
                                         ?>
@@ -72,7 +73,7 @@
                                     <?php 
                                             for($i=5;$i>=1;$i--):
                                         ?>
-                                <td scope="col" class="text-center"><?= $dataCash[$i] ?></td>
+                                <td scope="col" class="text-center"><?php echo number_format($dataCash[$i], 2); ?></td>
                                 <?php
                                             endfor;
                                         ?>
@@ -86,7 +87,7 @@
                                     <?php 
                                             for($i=5;$i>=1;$i--):
                                         ?>
-                                <td scope="col" class="text-center"><?= $dataQR[$i] ?></td>
+                                <td scope="col" class="text-center"><?php echo number_format($dataNPM[$i], 2); ?></td>
                                 <?php
                                             endfor;
                                         ?>
@@ -99,7 +100,7 @@
                                     <?php 
                                             for($i=5;$i>=1;$i--):
                                         ?>
-                                <td scope="col" class="text-center"><?= $dataQR[$i] ?></td>
+                                <td scope="col" class="text-center"><?php echo number_format($dataROT[$i], 2); ?></td>
                                 <?php
                                             endfor;
                                         ?>
