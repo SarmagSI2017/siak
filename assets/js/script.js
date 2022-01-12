@@ -34,31 +34,51 @@ $(document).ready(function () {
 
 	$('#button_akun').on('click', function (e) {
 		let noReff = $('#no_reff').val();
-		let nama = $('#nama').val();
-		let keterangan = $('#keterangan').val();
+		let nama = $('#nama_reff').val();
+		let saldo_normal = $('#saldo_normal').val();
+		let unsur_laporan_keuangan = $('#unsur_laporan_keuangan').val();
+		//let keterangan = $('#keterangan').val();
 
-		if (noReff == '') {
+		console.log(saldo_normal);
+
+		if (unsur_laporan_keuangan == null){
 			e.preventDefault();
 			swal({
 				type: 'error',
 				title: 'Oops...',
-				text: 'No.Reff wajib di isi',
+				text: 'Unsur Akun wajib dipilih',
+			});
+		}
+		else if (noReff == '') {
+			e.preventDefault();
+			swal({
+				type: 'error',
+				title: 'Oops...',
+				text: 'No.Reff wajib diisi',
 			});
 		} else if (nama == '') {
 			e.preventDefault();
 			swal({
 				type: 'error',
 				title: 'Oops...',
-				text: 'Nama Reff wajib di isi',
+				text: 'Nama Reff wajib diisi',
 			});
-		} else if (keterangan == '') {
+		} else if (saldo_normal == null){
 			e.preventDefault();
 			swal({
 				type: 'error',
 				title: 'Oops...',
-				text: 'Keterangan wajib di isi',
+				text: 'Saldo Normal wajib dipilih',
 			});
 		}
+		// } else if (keterangan == '') {
+		// 	e.preventDefault();
+		// 	swal({
+		// 		type: 'error',
+		// 		title: 'Oops...',
+		// 		text: 'Keterangan wajib di isi',
+		// 	});
+		// }
 	});
 
 	$('.hapus').on('click', function (e) {

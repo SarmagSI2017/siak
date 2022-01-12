@@ -52,6 +52,7 @@
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label><h4><b>Saldo Normal</b></h4></label>
+                            <p><?= form_error('is_atomic') ?></p>
                             <select class="form-control" name="saldo_normal" id="saldo_normal" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?>>
                               <option disabled selected>-- Pilih Saldo Normal --</option>
                               <?php
