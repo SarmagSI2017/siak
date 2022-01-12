@@ -31,7 +31,16 @@
                 <div class="card-header border-0">
                   <div class="row align-items-center">
                     <div class="col">
-                    <h3 class="mb-3"><?= $title ?> Rekam Transaksi</h3>
+                    <div class="col-lg-6 col-7">
+                      <h6 class="h2 d-inline-block mb-0"><?= $title ?> Rekam Transaksi </h6>
+                      <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4 text-primary">
+                        <ol class="breadcrumb breadcrumb-links">
+                          <li class="breadcrumb-item text-black"><a href="#"><i class="fas fa-home text-black"></i></a></li>
+                          <li class="breadcrumb-item text-black"><a href="<?= base_url('jurnal_umum') ?>">Rekam Transaksi</a></li>
+                          <li class="breadcrumb-item active text-black" aria-current="page"><?= $title ?></li>
+                        </ol>
+                      </nav>
+                    </div>
                   </div>
                   <div class="col-12 my-3 form-1">
                     <form action="<?= base_url($action) ?>" method="post">
