@@ -70,7 +70,7 @@
                             <i class="ni ni-collection text-red"></i> Buku Besar
                         </a>
                         </li> -->
-                                    <!-- <li class="nav-item">
+                        <!-- <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('neraca_saldo') ?>">
                             <i class="ni ni-book-bookmark text-yellow"></i> Neraca Saldo
                         </a>
