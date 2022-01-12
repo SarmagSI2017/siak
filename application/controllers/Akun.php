@@ -23,6 +23,13 @@ class Akun extends CI_Controller
     $dataAkun = $this->akun->getUnsurAkun();
     $this->load->view('template', compact('content', 'dataAkun', 'titleTag'));
   }
+  public function all()
+  {
+    $content = 'user/dataakun/lihat_all_akun';
+    $titleTag = 'Data Semua Akun';
+    $dataAkun = $this->akun->getSubUnsurAkun();
+    $this->load->view('template', compact('content', 'dataAkun', 'titleTag'));
+  }
   // public function dataAkunSubUnsur()
   // {
   //   $content = 'user/dataakun/data_akun_unsur';
