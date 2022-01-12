@@ -102,7 +102,7 @@
                       <div class="form-group">
                         <label for="keterangan"><h4><b>Keterangan</h4></b></label>
                         <!-- <p><?= form_error('keterangan') ?></p> -->
-                        <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control mb-3" required=false value=""><?= $data->keterangan ?></textarea>
+                        <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control mb-3" value=""><?= $data->keterangan ?></textarea>
                       </div>
                       <div class="col-12 mt-4">
                         <button type="submit" class="btn-primary btn" id="button_akun"><?= $title ?></button>
