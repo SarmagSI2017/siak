@@ -65,12 +65,12 @@
                         <div class="row mb-4">
                           <div class="col">
                             <label for="no_reff">Nama Akun</label>
-                            <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
+                            <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control no_reff', 'id' => '']); ?>
                             <?= form_error('no_reff') ?>
                           </div>  
                           <div class="col">
                             <label for="reff">No. Reff</label>
-                            <input type="text" name="reff[]" class="form-control" id="reff" readonly>
+                            <input type="text" name="reff[]" class="form-control reff" id="" readonly>
                           </div>
                           <div class="col">
                             <label for="jenis_saldo">Jenis Saldo</label>
@@ -112,12 +112,12 @@
                         <div class="row mb-4">
                           <div class="col">
                             <label for="no_reff">Nama Akun</label>
-                            <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control', 'id' => 'no_reff']); ?>
+                            <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control no_reff', 'id' => '']); ?>
                             <?= form_error('no_reff') ?>
                           </div>
                           <div class="col">
                             <label for="reff">No. Reff</label>
-                            <input type="text" name="reff[]" class="form-control" id="reff" readonly>
+                            <input type="text" name="reff[]" class="form-control reff" id="" readonly>
                           </div>
                           <div class="col">
                             <label for="jenis_saldo">Jenis Saldo</label>
