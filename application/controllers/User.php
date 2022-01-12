@@ -18,25 +18,10 @@ class User extends CI_Controller{
     public function index(){
         $titleTag = 'Dashboard';
         $content = 'user/dashboard';
-        $dataAkun = $this->akun->getAkun();
-        $dataAkunTransaksi = $this->jurnal->getAkunInJurnal();
-        
-        foreach($dataAkunTransaksi as $row){
-            $data[] = (array) $this->jurnal->getJurnalByNoReff($row->no_reff);
-            $saldo[] = (array) $this->jurnal->getJurnalByNoReffSaldo($row->no_reff);
-        }
+        $jumlahAkun = $this->akun->countAtomicAkun();
+        $jumlahJurnal = $this->jurnal->countJurnal();
 
-        // if($data == null || $saldo == null){
-        //     $data = 0;
-        //     $saldo = 0;
-        // }
-        
-        $jumlah = count($data);
-
-        $jurnals = $this->jurnal->getJurnalJoinAkun();
-        $totalDebit = $this->jurnal->getTotalSaldo('debit');
-        $totalKredit = $this->jurnal->getTotalSaldo('kredit');
-        $this->load->view('template',compact('content','dataAkun','titleTag','jurnals','totalDebit','totalKredit','jumlah','data','saldo','dataAkunTransaksi'));
+        $this->load->view('template',compact('content','titleTag','jumlahAkun','jumlahJurnal'));
     }
 
     public function dataAkun(){

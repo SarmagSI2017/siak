@@ -37,6 +37,10 @@ class Akun_model extends CI_Model{
                         ->result();
     }
 
+    public function countAtomicAkun() {
+        return $this->db->where('akun_temp.is_atomic', '1')->get($this->table)->num_rows();
+    }
+
     public function countAkunByNama($str){
         return $this->db->where('nama_reff',$str)->get($this->table)->num_rows();
     }

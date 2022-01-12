@@ -17,6 +17,13 @@ class Jurnal_model extends CI_Model{
         return $this->db->where('no_reff',$noReff)->get($this->table)->num_rows();
     }
 
+    public function countJurnal() {
+        return $this->db->group_by('month(tgl_transaksi)')
+                        ->group_by('year(tgl_transaksi)')
+                        ->get($this->table)
+                        ->num_rows();
+    }
+
     public function getJurnalByYear(){
         return $this->db->select('tgl_transaksi')
                         ->from($this->table)
