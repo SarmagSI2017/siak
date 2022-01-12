@@ -73,7 +73,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="atomic"><h4><b>Transaksi</b></h4></label>
+                        <label for="atomic"><h4><b>Apakah akun ini digunakan dalam transaksi?</b></h4></label>
                         <p><?= form_error('is_atomic') ?></p>
                         <!-- <input type="checkbox" name="is_atomic" id="is_atomic" class="form-control mb-3" <?php if ($title == 'Edit') { ?> value="<?= $data->is_atomic ?>" <?php } else { ?> value="" <?php } ?> /> -->
 
@@ -102,7 +102,7 @@
                       <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <!-- <p><?= form_error('keterangan') ?></p> -->
-                        <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control mb-3" required=false value=""><?= $data->keterangan ?></textarea>
+                        <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control mb-3" value=""><?= $data->keterangan ?></textarea>
                       </div>
                       <div class="col-12 mt-4">
                         <button type="submit" class="btn-primary btn" id="button_akun"><?= $title ?></button>
