@@ -1,11 +1,11 @@
     <!-- Header -->
     <div class="header bg-primary pb-6">
-        <div class="container-fluid">
-            <div class="header-body">
-                <div class="row align-items-center py-4">
-                </div>
-            </div>
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+          </div>
         </div>
+      </div>
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
@@ -15,7 +15,13 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">Rekam Transaksi</h3>
+                  <h6 class="h2 d-inline-block mb-0">List Data Akun </h6>
+                  <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4 text-primary">
+                    <ol class="breadcrumb breadcrumb-links">
+                      <li class="breadcrumb-item text-black"><a href="#"><i class="fas fa-home text-black"></i></a></li>
+                      <li class="breadcrumb-item active text-black" aria-current="page">Rekam Transaksi</li>
+                    </ol>
+                  </nav>
                 </div>
               </div>
               <div class="row">
