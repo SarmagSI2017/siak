@@ -37,7 +37,7 @@
 $(document).ready(function() {
     $(".add-more").click(function() {
         var html = $(".copy").html();
-        $(".after-add-more").after(html);
+        $(".after-add-more").append(html);
     });
 
 
@@ -45,10 +45,7 @@ $(document).ready(function() {
     $("body").on("click", ".remove", function() {
         $(this).parents(".control-group").remove();
     });
-        $('#no_reff2').change(function () {
-		let nilai = $(this).val();
-		$('#reff2').val(nilai);
-	});
+
 });
 
 </script>
