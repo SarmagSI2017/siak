@@ -168,11 +168,6 @@ class Akun_model extends CI_Model{
                     'label'=>'Nama Reff',
                     'rules'=>'trim|required|callback_isNamaAkunThere'
                 ],
-                [
-                    'field'=>'keterangan',
-                    'label'=>'Keterangan',
-                    'rules'=>'trim|required'
-                ],
             ];
         }
         else
@@ -181,17 +176,12 @@ class Akun_model extends CI_Model{
                 [
                     'field'=>'no_reff',
                     'label'=>'No.Reff',
-                    'rules'=>'trim|required|numeric|callback_isNoAkunThere'
+                    'rules'=>'trim|required|callback_isNoAkunThere'
                 ],
                 [
                     'field'=>'nama_reff',
                     'label'=>'Nama Reff',
                     'rules'=>'trim|required|callback_isNamaAkunThere'
-                ],
-                [
-                    'field'=>'keterangan',
-                    'label'=>'Keterangan',
-                    'rules'=>'trim|required'
                 ],
             ];
         }

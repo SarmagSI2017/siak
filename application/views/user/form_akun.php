@@ -29,13 +29,9 @@
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
-                            <label>
-                              <h4><b>Unsur Akun</b></h4>
-                            </label>
-                            <select class="form-control" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" onchange="addData()" required="required" <?php if ($title == 'Edit') {
-                                                                                                                                                              echo "readonly";
-                                                                                                                                                            } ?>>
-                              <option disabled selected>-- Daftar Sub Header --</option>
+                            <label><h4><b>Unsur Akun</b></h4></label>
+                            <select class="form-control" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" onchange="addData()" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?> >
+                              <option disabled selected>-- Daftar Unsur Akun --</option>
                               <!-- <option value="<?= $data->no_reff ?>" ><?= $data->nama_reff ?></option> -->
                               <?php
                               foreach ($dataunsur as $row) :
@@ -69,12 +65,9 @@
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
-                            <label>
-                              <h4><b>Saldo Normal</b></h4>
-                            </label>
-                            <select class="form-control" name="saldo_normal" id="saldo_normal" required="required" <?php if ($title == 'Edit') {
-                                                                                                                      echo "readonly";
-                                                                                                                    } ?>>
+                            <label><h4><b>Saldo Normal</b></h4></label>
+                            <p><?= form_error('is_atomic') ?></p>
+                            <select class="form-control" name="saldo_normal" id="saldo_normal" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?>>
                               <option disabled selected>-- Pilih Saldo Normal --</option>
                               <?php
                               if ($title == 'Edit') {
