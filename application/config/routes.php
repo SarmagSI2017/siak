@@ -70,6 +70,7 @@ $route['data_akun'] = 'akun/dataAkunUnsur';
 $route['data_akun/tambah'] = 'akun/createAkun';
 // $route['data_akun/edit/(:num)'] = 'user/editAkun/$1';
 $route['data_akun/edit/(:any)'] = 'akun/editAkun/$1';
+$route['data_akun/all'] = 'akun/all';
 $route['data_akun/hapus'] = 'user/deleteAkun';
 
 // DATA SUBAKUNNEW

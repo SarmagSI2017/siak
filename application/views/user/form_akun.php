@@ -100,7 +100,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
+                        <label for="keterangan"><h4><b>Keterangan</h4></b></label>
                         <!-- <p><?= form_error('keterangan') ?></p> -->
                         <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control mb-3" value=""><?= $data->keterangan ?></textarea>
                       </div>
