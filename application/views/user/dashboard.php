@@ -12,19 +12,23 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Total traffic</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Akun</h5>
+                      <br>
+                      <?php 
+                              $sql = "SELECT COUNT(*)
+                              FROM `akun_temp`";
+                              $query = $this->db->query($sql);
+                              $result = $query->row_array();
+                              $count = $result['COUNT(*)'];
+                      ?>
+                      <span class="h2 font-weight-bold mb-0"><?= $count ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-active-40"></i>
+                        <i class="ni ni-chart-pie-35"></i>
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -34,8 +38,15 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Jurnal Umum</h5>
+                      <?php 
+                              $sql = "SELECT COUNT(*)
+                              FROM `akun_temp`";
+                              $query = $this->db->query($sql);
+                              $result = $query->row_array();
+                              $count1 = $result['COUNT(*)'];
+                      ?>
+                      <span class="h2 font-weight-bold mb-0"><?= $count1 ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -43,10 +54,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -56,8 +63,15 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                      <span class="h2 font-weight-bold mb-0">924</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Laporan Komprehensif</h5>
+                      <?php 
+                              $sql = "SELECT COUNT(*)
+                              FROM `akun_temp`";
+                              $query = $this->db->query($sql);
+                              $result = $query->row_array();
+                              $count2 = $result['COUNT(*)'];
+                      ?>
+                      <span class="h2 font-weight-bold mb-0"><?= $count2 ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -65,10 +79,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -80,8 +90,15 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Total traffic</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Laporan Posisi Keuangan</h5>
+                      <?php 
+                              $sql = "SELECT COUNT(*)
+                              FROM `akun_temp`";
+                              $query = $this->db->query($sql);
+                              $result = $query->row_array();
+                              $count3 = $result['COUNT(*)'];
+                      ?>
+                      <span class="h2 font-weight-bold mb-0"><?= $count3 ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -89,10 +106,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -102,8 +115,15 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Laporan Aset Neto</h5>
+                      <?php 
+                              $sql = "SELECT COUNT(*)
+                              FROM `akun_temp`";
+                              $query = $this->db->query($sql);
+                              $result = $query->row_array();
+                              $count4 = $result['COUNT(*)'];
+                      ?>
+                      <span class="h2 font-weight-bold mb-0"><?= $count4 ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -111,10 +131,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -123,3 +139,5 @@
         </div>
       </div>
     </div>
+<div></div>
+<div></div>
