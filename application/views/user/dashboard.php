@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
+                        <i class="ni ni-archive-2"></i>
                       </div>
                     </div>
                   </div>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
+                        <i class="ni ni-single-copy-04"></i>
                       </div>
                     </div>
                   </div>
@@ -53,8 +53,8 @@
                       <span class="h2 font-weight-bold mb-0"><?= $jumlahJurnal ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-money-coins"></i>
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-single-copy-04"></i>
                       </div>
                     </div>
                   </div>
@@ -73,8 +73,8 @@
                       <span class="h2 font-weight-bold mb-0"><?= $jumlahJurnal ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-active-40"></i>
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="ni ni-money-coins"></i>
                       </div>
                     </div>
                   </div>
@@ -91,8 +91,8 @@
                       <span class="h2 font-weight-bold mb-0"><?= $jumlahJurnal ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="ni ni-money-coins"></i>
                       </div>
                     </div>
                   </div>
