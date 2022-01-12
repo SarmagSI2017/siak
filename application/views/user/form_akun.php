@@ -22,7 +22,7 @@
                           <div class="form-group form-group-default">
                             <label><h4><b>Unsur Akun</b></h4></label>
                             <select class="form-control" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" onchange="addData()" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?> >
-                              <option disabled selected>-- Daftar Sub Header --</option>
+                              <option disabled selected>-- Daftar Unsur Akun --</option>
                               <!-- <option value="<?= $data->no_reff ?>" ><?= $data->nama_reff ?></option> -->
                               <?php
                                 foreach ($dataunsur as $row) :
