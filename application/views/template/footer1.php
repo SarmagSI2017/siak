@@ -1,11 +1,11 @@
 <footer class="footer pt-0">
-  <div class="row align-items-center justify-content-lg-between">
-    <div class="col-xl-6">
-      <div class="copyright text-center text-xl-left text-muted">
-        &copy; 2021 <a class="font-weight-bold ml-1" target="_blank">SARMAG SIB</a>
-      </div>
+    <div class="row align-items-center justify-content-lg-between">
+        <div class="col-xl-6">
+            <div class="copyright text-center text-xl-left text-muted">
+                &copy; 2021 <a class="font-weight-bold ml-1" target="_blank">SARMAG SIB</a>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 </div>
 </div>
@@ -34,53 +34,53 @@
 <!-- Custom JS -->
 <script src="<?= base_url('assets/js/script.js') ?>"></script>
 <script>
-  $(document).ready(function() {
+$(document).ready(function() {
     $(".add-more").click(function() {
-      var html = $(".copy").html();
-      $(".after-add-more").after(html);
+        var html = $(".copy").html();
+        $(".after-add-more").after(html);
     });
 
     // saat tombol remove dklik control group akan dihapus 
     $("body").on("click", ".remove", function() {
-      $(this).parents(".control-group").remove();
+        $(this).parents(".control-group").remove();
     });
-  });
+});
 </script>
 <?php
 $pesan = $this->session->flashdata('berhasil');
 if (!empty($pesan)) :
 ?>
-  <!-- SCRIPT SWEETALERT INLINE -->
-  <script>
-    $(window).on('load', function() {
-      let pesan = "<?= $pesan ?>";
-      swal('Berhasil!', pesan, 'success');
-    });
-  </script>
+<!-- SCRIPT SWEETALERT INLINE -->
+<script>
+$(window).on('load', function() {
+    let pesan = "<?= $pesan ?>";
+    swal('Berhasil!', pesan, 'success');
+});
+</script>
 <?php endif; ?>
 
 <?php
 $pesan = $this->session->flashdata('berhasilHapus');
 if (!empty($pesan)) :
 ?>
-  <script>
-    $(window).on('load', function() {
-      let pesan = "<?= $pesan ?>";
-      swal('Berhasil!', pesan, 'success');
-    });
-  </script>
+<script>
+$(window).on('load', function() {
+    let pesan = "<?= $pesan ?>";
+    swal('Berhasil!', pesan, 'success');
+});
+</script>
 <?php endif; ?>
 
 <?php
 $pesan = $this->session->flashdata('dataNull');
 if (!empty($pesan)) :
 ?>
-  <script>
-    $(window).on('load', function() {
-      let pesan = "<?= $pesan ?>";
-      swal('Oops!', pesan, 'error');
-    });
-  </script>
+<script>
+$(window).on('load', function() {
+    let pesan = "<?= $pesan ?>";
+    swal('Oops!', pesan, 'error');
+});
+</script>
 <?php endif; ?>
 </body>
 
