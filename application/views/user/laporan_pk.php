@@ -16,6 +16,12 @@
       					<div class="row align-items-center py-0">
       						<div class="col-lg-6 col-7">
       							<h6 class="h2 d-inline-block mb-0">Laporan Posisi Keuangan</h6>
+										<nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4 text-primary">
+                      <ol class="breadcrumb breadcrumb-links">
+                        <li class="breadcrumb-item text-black"><a href="<?= base_url('dashboard') ?>"><i class="fas fa-home text-black"></i></a></li>
+                        <li class="breadcrumb-item active text-black" aria-current="page">Laporan Posisi Keuangan</li>
+                      </ol>
+                    </nav>
       						</div>
       						<div class="col-6 text-right">
       							<form action="<?= base_url('laporan_pk/detail') ?>" method="post" class="d-flex flex-row justify-content-end">

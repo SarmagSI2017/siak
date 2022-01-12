@@ -11,6 +11,7 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4 text-primary">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                           <li class="breadcrumb-item text-black"><a href="<?= base_url('dashboard') ?>"><i class="fas fa-home text-black"></i></a></li>
+                          <li class="breadcrumb-item text-black"><a href="<?= base_url('laporan_kompre') ?>">Laporan Komprehensif</a></li>
                           <li class="breadcrumb-item active text-black" aria-current="page">Detail Laporan Komprehensif</li>
                         </ol>
                       </nav>

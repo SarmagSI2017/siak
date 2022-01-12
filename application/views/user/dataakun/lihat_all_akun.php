@@ -20,7 +20,7 @@
               <h6 class="h2 d-inline-block mb-0">List Data Akun </h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4 text-primary">
                 <ol class="breadcrumb breadcrumb-links">
-                  <li class="breadcrumb-item text-black"><a href="#"><i class="fas fa-home text-black"></i></a></li>
+                  <li class="breadcrumb-item text-black"><a href="<?= base_url('dashboard') ?>"><i class="fas fa-home text-black"></i></a></li>
                   <li class="breadcrumb-item text-black"><a href="<?= base_url('data_akun') ?>">Data Unsur Akun</a></li>
                   <li class="breadcrumb-item active text-black" aria-current="page">Lihat Semua Data Akun</li>
                 </ol>

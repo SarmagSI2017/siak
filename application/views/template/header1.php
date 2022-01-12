@@ -28,7 +28,7 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header d-flex align-items-center">
-                <a class="navbar-brand" href="./index.html">
+                <a class="navbar-brand" href="<?= base_url('dashboard') ?>">
                     <img src="<?= base_url('assets/assets/img/brand/blue.png') ?>" class="navbar-brand-img" alt="...">
                 </a>
                 <div class="ml-auto">
@@ -117,7 +117,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="https://forms.gle/XVmbX6aUpbGJmi138" target="_blank">
                                 <i class="ni ni-single-copy-04 text-green"></i>
-                                <span class="nav-link-text">From Feedback Application</span>
+                                <span class="nav-link-text">Form Feedback Application</span>
                             </a>
                         </li>
                     </ul>
