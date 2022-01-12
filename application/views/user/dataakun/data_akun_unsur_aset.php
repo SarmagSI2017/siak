@@ -21,7 +21,7 @@
             </div>
             <div class="col-6 text-right">
               <a href="<?= base_url('data_akun/all') ?>" class="btn btn-primary mt-2">Lihat List Akun</a>
-              <a href="<?= base_url('data_akun/tambah') ?>" class="btn btn-primary mt-2">Tambah Akun</a>
+              <a href="<?= base_url('data_akun/tambah')?>" class="btn btn-primary mt-2">Tambah Akun</a>
               <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Tambah Unsur Akun
               </button> -->
@@ -35,6 +35,7 @@
                 <th>No. Reff</th>
                 <th class="text-center">Nama Akun</th>
                 <th class="text-center">Saldo Normal</th>
+                <th class="text-center">Keterangan</th>
                 <th class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -53,8 +54,10 @@
                   <td>
                     <?= $row->saldo_normal ?>
                   </td>
+                  <td>
+                    <?= $row->keterangan ?>
+                  </td>
                   <td class="d-flex justify-content-center">
-                    <a href="<?= base_url() ?>" class="btn btn-primary mb-4">Detail</a>
                     <a href="<?= base_url('data_akun/edit/'.$row->no_reff) ?>" class="btn btn-warning mb-4">Edit</a>
                     
                   </td>

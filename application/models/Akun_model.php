@@ -18,7 +18,7 @@ class Akun_model extends CI_Model{
     }
     public function getAkunByUnsur($no_unsur){
         // return $this->db->where('no_unsur',$no_unsur)->get($this->tablesubunsur)->row();
-        return $this->db->select('no_reff,nama_reff,saldo_normal,unsur_laporan_keuangan')
+        return $this->db->select('no_reff,nama_reff,saldo_normal,unsur_laporan_keuangan,keterangan')
         ->where('unsur_laporan_keuangan',$no_unsur)
         ->from($this->tablesubunsur)
         ->get()
