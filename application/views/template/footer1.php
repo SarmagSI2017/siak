@@ -40,11 +40,17 @@ $(document).ready(function() {
         $(".after-add-more").after(html);
     });
 
+
     // saat tombol remove dklik control group akan dihapus 
     $("body").on("click", ".remove", function() {
         $(this).parents(".control-group").remove();
     });
+        $('#no_reff2').change(function () {
+		let nilai = $(this).val();
+		$('#reff2').val(nilai);
+	});
 });
+
 </script>
 <?php
 $pesan = $this->session->flashdata('berhasil');
