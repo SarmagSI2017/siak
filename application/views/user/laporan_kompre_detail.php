@@ -93,8 +93,7 @@
                                         <td></td>
                                     </tr>
                                 <?php } ?>
-                            <?php endfor;
-                            $hasil = 0; ?>
+                            <?php $hasil = 0; endfor; ?>
                             <tr style="background-color:aquamarine;">
                                 <td>Total Pendapatan</td>
                                 <td></td>
@@ -136,7 +135,7 @@
                                         <td></td>
                                     </tr>
                                 <?php } ?>
-                            <?php endfor ?>
+                            <?php $hasil = 0; endfor; ?>
                             <tr style="background-color:aquamarine;">
                                 <td>Total Beban</td>
                                 <td></td>
@@ -209,8 +208,7 @@
                                         <td></td>
                                     </tr>
                                 <?php } ?>
-                            <?php endfor;
-                            $hasil = 0; ?>
+                            <?php $hasil = 0; endfor; ?>
                             <tr style="background-color:aquamarine;">
                                 <td>Total Pendapatan</td>
                                 <td></td>
@@ -252,7 +250,7 @@
                                         <td></td>
                                     </tr>
                                 <?php } ?>
-                            <?php endfor ?>
+                            <?php $hasil = 0; endfor ?>
                             <tr style="background-color:aquamarine;">
                                 <td>Total Beban</td>
                                 <td></td>

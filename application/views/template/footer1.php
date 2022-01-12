@@ -1,6 +1,6 @@
-<footer class="footer pt-0">
+<footer class="footer pt-2 d-flex justify-content-center">
     <div class="row align-items-center justify-content-lg-between">
-        <div class="col-xl-6">
+        <div class="col-xl-12">
             <div class="copyright text-center text-xl-left text-muted">
                 &copy; 2021 <a class="font-weight-bold ml-1" target="_blank">SARMAG SIB</a>
             </div>
