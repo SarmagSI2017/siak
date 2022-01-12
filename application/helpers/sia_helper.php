@@ -1,8 +1,14 @@
 <?php
-  function getDropdownList($table,$column){
+  function getDropdownList($table,$column,$condition = '', $argument = ''){
     $CI =& get_instance();
 
-    $query = $CI->db->select($column)->from($table)->get();
+    if($condition == ''){
+      $query = $CI->db->select($column)->from($table)->get();
+    }
+    else{
+      $query = $CI->db->select($column)->from($table)->where($condition, $argument)->get();
+    }
+    
 
     if($query->num_rows() >= 1){
       $option1 = ['' => '- Pilih -'];
