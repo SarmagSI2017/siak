@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 08 Feb 2020 pada 10.42
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 7.3.2
+-- Host: localhost:3306
+-- Generation Time: Jan 13, 2022 at 11:18 AM
+-- Server version: 10.3.31-MariaDB-0+deb10u1
+-- PHP Version: 7.3.31-1~deb10u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akun`
+-- Table structure for table `akun`
 --
 
 CREATE TABLE `akun` (
@@ -36,7 +34,7 @@ CREATE TABLE `akun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akun`
+-- Dumping data for table `akun`
 --
 
 INSERT INTO `akun` (`no_reff`, `id_user`, `nama_reff`, `keterangan`) VALUES
@@ -58,7 +56,64 @@ INSERT INTO `akun` (`no_reff`, `id_user`, `nama_reff`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi`
+-- Table structure for table `akun_temp`
+--
+
+CREATE TABLE `akun_temp` (
+  `no_reff` varchar(25) NOT NULL,
+  `nama_reff` varchar(50) NOT NULL,
+  `saldo_normal` varchar(25) NOT NULL,
+  `keterangan` varchar(50) DEFAULT NULL,
+  `unsur_laporan_keuangan` int(5) NOT NULL,
+  `induk` varchar(25) DEFAULT NULL,
+  `is_atomic` int(5) NOT NULL COMMENT 'yang bisa transaksi 1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `akun_temp`
+--
+
+INSERT INTO `akun_temp` (`no_reff`, `nama_reff`, `saldo_normal`, `keterangan`, `unsur_laporan_keuangan`, `induk`, `is_atomic`) VALUES
+('1-1000', 'Kas dan Setara Kas', 'Debit', NULL, 1, NULL, 0),
+('1-1100', 'Kas Kecil', 'Debit', NULL, 1, '1-1000', 1),
+('1-1200', 'Setara Kas', 'Debit', NULL, 1, '1-1000', 0),
+('1-1210', 'Deposito', 'Debit', NULL, 1, '1-1200', 0),
+('1-1211', 'Deposito A', 'Debit', NULL, 1, '1-1210', 1),
+('1-1212', 'Deposito B', 'Debit', NULL, 1, '1-1210', 1),
+('1-1220', 'Giro/Tabungan', 'Debit', NULL, 1, '1-1200', 0),
+('1-1221', 'Giro A', 'Debit', NULL, 1, '1-1220', 1),
+('1-1222', 'Giro B', 'Debit', NULL, 1, '1-1220', 1),
+('1-1223', 'Giro C', 'Debit', NULL, 1, '1-1220', 1),
+('1-1224', 'Giro D', 'Debit', '', 1, NULL, 1),
+('1-2000', 'Persediaan', 'Debit', NULL, 1, NULL, 1),
+('1-3000', 'Piutang', 'Debit', NULL, 1, NULL, 0),
+('1-3100', 'Piutang Karyawan', 'Debit', NULL, 1, '1-3000', 1),
+('1-3200', 'Piutang Usaha', 'Debit', NULL, 1, '1-3000', 1),
+('1-3300', 'Piutang Lain-lain', 'Debit', NULL, 1, '1-3000', 1),
+('2-1000', 'Liability Jangka Pendek', 'Kredit', NULL, 2, NULL, 0),
+('2-1100', 'Utang Gaji', 'Kredit', NULL, 2, '2-1000', 1),
+('2-1200', 'Uang Muka', 'Kredit', NULL, 2, '2-1000', 1),
+('2-1300', 'Utang Bank Jatuh Tempo', 'Kredit', NULL, 2, '2-1000', 1),
+('2-2000', 'Liability Jangka Panjang', 'Kredit', NULL, 2, NULL, 0),
+('2-2100', 'Utang Bank', 'Kredit', NULL, 2, '2-2000', 1),
+('2-2200', 'Utang A', 'Kredit', NULL, 2, '2-2000', 1),
+('3-1000', 'Aset Tanpa Pembatasan', 'Debit', NULL, 3, NULL, 1),
+('3-2000', 'Aset dengan Pembatasan', 'Debit', NULL, 3, NULL, 1),
+('4-1000', 'Sumbangan', 'Kredit', NULL, 4, NULL, 1),
+('4-2000', 'Jasa', 'Kredit', NULL, 4, NULL, 1),
+('5-1000', 'Beban A', 'Debit', '', 5, NULL, 1),
+('5-2000', 'Beban B', 'Debit', '', 5, NULL, 1),
+('6-1000', 'Pendapatan', 'Kredit', NULL, 6, NULL, 0),
+('6-1100', 'Pendapatan A', 'Kredit', NULL, 6, '6-1000', 1),
+('6-1200', 'Pendapatan B', 'Kredit', NULL, 6, '6-1000', 1),
+('6-2000', 'Beban', 'Debit', NULL, 6, NULL, 0),
+('6-2100', 'Beban A', 'Debit', NULL, 6, '6-2000', 1),
+('6-2200', 'Beban B', 'Debit', NULL, 6, '6-2000', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
 --
 
 CREATE TABLE `transaksi` (
@@ -71,52 +126,109 @@ CREATE TABLE `transaksi` (
   `saldo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `transaksi`
+-- Table structure for table `transaksi_temp`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `no_reff`, `tgl_input`, `tgl_transaksi`, `jenis_saldo`, `saldo`) VALUES
-(15, 1, 111, '2021-11-26 17:45:45', '2021-11-03', 'debit', 80000000),
-(16, 1, 311, '2021-11-26 17:45:45', '2021-11-03', 'kredit', 80000000),
-(17, 1, 121, '2021-11-26 17:46:37', '2021-11-03', 'debit', 35000000),
-(18, 1, 311, '2021-11-26 17:46:37', '2021-11-03', 'kredit', 35000000),
-(19, 1, 512, '2021-11-26 17:49:00', '2021-11-04', 'debit', 6000000),
-(20, 1, 111, '2021-11-26 17:49:00', '2021-11-04', 'kredit', 6000000),
-(21, 1, 111, '2021-11-26 17:52:00', '2021-11-05', 'kredit', 1900000),
-(22, 1, 113, '2021-11-26 17:52:00', '2021-11-05', 'debit', 1900000),
-(23, 1, 121, '2021-11-26 17:55:08', '2021-11-08', 'debit', 2000000),
-(24, 1, 211, '2021-11-26 17:55:08', '2021-11-08', 'kredit', 2000000),
-(25, 1, 411, '2021-11-26 17:57:04', '2021-11-10', 'kredit', 950000),
-(26, 1, 112, '2021-11-26 17:57:04', '2021-11-10', 'debit', 950000),
-(27, 1, 111, '2021-11-26 17:57:49', '2021-11-12', 'debit', 2500000),
-(28, 1, 411, '2021-11-26 17:57:49', '2021-11-12', 'kredit', 2500000),
-(29, 1, 211, '2021-11-26 17:59:24', '2021-11-15', 'debit', 200000),
-(30, 1, 111, '2021-11-26 17:59:24', '2021-11-15', 'kredit', 200000),
-(31, 1, 312, '2021-11-26 18:05:40', '2021-11-20', 'debit', 750000),
-(32, 1, 111, '2021-11-26 18:05:40', '2021-11-20', 'kredit', 750000),
-(33, 1, 111, '2021-11-26 18:06:13', '2021-11-28', 'debit', 750000),
-(34, 1, 112, '2021-11-26 18:06:13', '2021-11-28', 'kredit', 750000),
-(35, 1, 511, '2021-11-26 18:10:23', '2021-11-29', 'debit', 900000),
-(36, 1, 111, '2021-11-26 18:10:23', '2021-11-29', 'kredit', 900000),
-(37, 1, 514, '2021-11-26 18:10:57', '2021-11-30', 'debit', 1600000),
-(38, 1, 111, '2021-11-26 18:10:57', '2021-11-30', 'kredit', 1600000),
-(39, 1, 515, '2021-11-26 18:12:55', '2021-11-30', 'debit', 1150000),
-(40, 1, 113, '2021-11-26 18:12:55', '2021-11-30', 'kredit', 1150000),
-(41, 1, 513, '2021-11-26 18:14:43', '2021-11-30', 'debit', 250000),
-(42, 1, 122, '2021-11-26 18:14:43', '2021-11-30', 'kredit', 250000),
-(43, 1, 512, '2021-11-26 18:15:20', '2021-11-26', 'debit', 500000),
-(44, 1, 111, '2021-11-26 18:15:20', '2021-11-26', 'kredit', 500000),
-(45, 1, 111, '2021-11-28 10:40:25', '2019-11-30', 'debit', 2000000),
-(46, 1, 112, '2021-11-28 10:40:25', '2019-11-30', 'kredit', 2000000),
-(47, 1, 514, '2021-11-29 12:56:41', '2021-10-01', 'debit', 1000),
-(48, 1, 111, '2021-11-29 12:56:41', '2021-10-01', 'kredit', 1000),
-(49, 1, 112, '2021-11-28 12:15:31', '2021-10-02', 'debit', 2000000),
-(50, 1, 113, '2021-11-28 12:15:31', '2021-10-02', 'kredit', 2000000);
+CREATE TABLE `transaksi_temp` (
+  `id_transaksi` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `no_reff` varchar(25) NOT NULL,
+  `tgl_input` datetime NOT NULL,
+  `tgl_transaksi` date NOT NULL,
+  `jenis_saldo` enum('debit','kredit','','') NOT NULL,
+  `saldo` int(11) NOT NULL,
+  `Keterangan` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksi_temp`
+--
+
+INSERT INTO `transaksi_temp` (`id_transaksi`, `id_user`, `no_reff`, `tgl_input`, `tgl_transaksi`, `jenis_saldo`, `saldo`, `Keterangan`) VALUES
+(1, 1, '1-1100', '2022-01-08 15:58:56', '2022-01-08', 'debit', 20000, ''),
+(2, 1, '4-1000', '2022-01-06 22:19:16', '2022-01-08', 'kredit', 20000, 'Sumbangan Gunung Ken'),
+(3, 1, '5-1000', '2022-01-08 16:27:07', '2021-12-22', 'debit', 2000, 'Beban barang'),
+(4, 1, '1-1100', '2022-01-08 16:28:50', '2021-12-29', 'kredit', 2000, ''),
+(5, 1, '6-1100', '2022-01-08 18:21:34', '2021-12-01', 'kredit', 6000, 'Sumbangan UG'),
+(6, 1, '1-1100', '2022-01-08 18:21:34', '2021-12-01', 'debit', 6000, 'Sumbangan UG'),
+(7, 1, '6-1100', '2022-01-08 18:42:22', '2021-11-01', 'kredit', 50000, 'Saldo Awal'),
+(8, 1, '1-1100', '2022-01-08 18:42:22', '2021-11-01', 'debit', 50000, 'Saldo Awal'),
+(9, 1, '4-1000', '2021-11-01 00:47:10', '2021-11-01', 'kredit', 8000, 'Saldo Awal'),
+(10, 1, '1-1100', '2022-01-08 18:47:10', '2021-11-01', 'debit', 8000, 'Saldo Awal'),
+(11, 1, '1-1100', '2022-01-09 07:10:45', '2021-12-14', 'debit', 9000, 'Jual Rumah'),
+(12, 1, '4-1000', '2022-01-09 07:10:45', '2021-12-14', 'kredit', 9000, 'Jual Rumah'),
+(13, 1, '1-1100', '2022-01-09 07:12:41', '2021-12-15', 'debit', 500, 'Jual Permen'),
+(14, 1, '4-1000', '2022-01-09 07:12:41', '2021-12-15', 'kredit', 500, 'Jual Permen'),
+(15124, 1, '1-1100', '2022-01-09 15:41:53', '2022-01-09', 'debit', 1000, ''),
+(15125, 1, '4-1000', '2022-01-09 15:41:53', '2022-01-09', 'kredit', 1000, ''),
+(15126, 1, '1-1100', '2022-01-09 15:57:12', '2022-01-09', 'debit', 3000, 'Jasa Pengantaran'),
+(15127, 1, '4-2000', '2022-01-09 15:57:12', '2022-01-09', 'kredit', 3000, 'Jasa Pengantaran'),
+(15128, 1, '1-1100', '2022-01-12 12:14:33', '2022-01-12', 'debit', 20000, ''),
+(15129, 1, '2-1100', '2022-01-12 12:14:33', '2022-01-12', 'kredit', 20000, ''),
+(15130, 1, '1-1100', '2022-01-12 12:15:31', '2021-02-01', 'debit', 20000, ''),
+(15131, 1, '2-1100', '2022-01-12 12:15:31', '2021-02-01', 'kredit', 20000, ''),
+(15132, 1, '6-2100', '2022-01-12 12:38:47', '2022-01-12', 'debit', 20000, ''),
+(15133, 1, '1-1100', '2022-01-12 12:38:47', '2022-01-12', 'kredit', 20000, ''),
+(15134, 1, '6-2100', '2022-01-12 12:39:19', '2021-02-03', 'debit', 20000, ''),
+(15135, 1, '1-1100', '2022-01-12 12:39:19', '2021-02-03', 'kredit', 20000, ''),
+(15136, 1, '1-1100', '2022-01-13 11:17:44', '2022-01-13', 'debit', 1000000, ''),
+(15137, 1, '1-3200', '2022-01-13 11:17:44', '2022-01-13', 'kredit', 1000000, ''),
+(15138, 1, '1-1100', '2022-01-13 11:36:59', '2017-12-03', 'debit', 1500000, ''),
+(15139, 1, '1-3300', '2022-01-13 11:36:59', '2017-12-03', 'kredit', 1500000, ''),
+(15142, 1, '6-2100', '2022-01-13 11:40:13', '2017-12-05', 'debit', 500000, ''),
+(15143, 1, '1-1100', '2022-01-13 11:40:13', '2017-12-05', 'kredit', 500000, ''),
+(15144, 1, '1-1100', '2022-01-13 11:41:15', '2017-12-04', 'debit', 1000000, ''),
+(15145, 1, '4-1000', '2022-01-13 11:41:15', '2017-12-04', 'kredit', 1000000, ''),
+(15146, 1, '5-1000', '2022-01-13 11:42:16', '2018-11-03', 'debit', 500000, ''),
+(15147, 1, '1-1100', '2022-01-13 11:42:16', '2018-11-03', 'kredit', 500000, ''),
+(15148, 1, '2-1100', '2022-01-13 11:43:13', '2018-11-04', 'debit', 1000000, ''),
+(15149, 1, '1-1100', '2022-01-13 11:43:13', '2018-11-04', 'kredit', 1000000, ''),
+(15153, 1, '1-1100', '2022-01-13 11:45:53', '2018-11-05', 'debit', 2000000, ''),
+(15154, 1, '4-1000', '2022-01-13 11:45:53', '2018-11-05', 'kredit', 1000000, ''),
+(15155, 1, '4-2000', '2022-01-13 11:45:53', '2018-11-05', 'kredit', 1000000, ''),
+(15156, 1, '1-2000', '2022-01-13 11:47:16', '2019-12-03', 'debit', 750000, ''),
+(15157, 1, '2-2100', '2022-01-13 11:47:16', '2019-12-03', 'kredit', 750000, ''),
+(15158, 1, '1-1100', '2022-01-13 11:51:40', '2019-12-05', 'debit', 2000000, ''),
+(15159, 1, '4-2000', '2022-01-13 11:51:40', '2019-12-05', 'kredit', 2000000, ''),
+(15160, 1, '5-2000', '2022-01-13 11:52:07', '2019-12-07', 'debit', 1000000, ''),
+(15161, 1, '1-1100', '2022-01-13 11:52:07', '2019-12-07', 'kredit', 1000000, ''),
+(15162, 1, '2-2100', '2022-01-13 11:53:52', '2020-10-03', 'debit', 2000000, ''),
+(15163, 1, '1-1100', '2022-01-13 11:53:52', '2020-10-03', 'kredit', 2000000, ''),
+(15164, 1, '1-1100', '2022-01-13 11:55:54', '2020-10-14', 'debit', 1100000, ''),
+(15165, 1, '4-1000', '2022-01-13 11:55:54', '2020-10-14', 'kredit', 1100000, ''),
+(15166, 1, '5-1000', '2022-01-13 11:56:13', '2022-01-13', 'debit', 500000, ''),
+(15167, 1, '1-1100', '2022-01-13 11:56:13', '2022-01-13', 'kredit', 500000, '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `unsur_laporan_keuangan`
+--
+
+CREATE TABLE `unsur_laporan_keuangan` (
+  `no_unsur` int(11) NOT NULL,
+  `nama_unsur` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `unsur_laporan_keuangan`
+--
+
+INSERT INTO `unsur_laporan_keuangan` (`no_unsur`, `nama_unsur`) VALUES
+(1, 'Aset'),
+(2, 'Liability'),
+(3, 'Aset Neto'),
+(4, 'Pendapatan'),
+(5, 'Beban'),
+(6, 'Dengan Pembatasan dari Pemberi Sumber Daya');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -131,25 +243,31 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `jk`, `alamat`, `email`, `username`, `password`, `last_login`) VALUES
-(1, 'Hidayat Chandra', 'laki-laki', 'JL.H.B Jassin No.337', 'hidayatchandra08@gmail.com', 'admin', '69005bb62e9622ee1de61958aacf0f63', '2020-02-08 17:42:31');
+(1, 'Admin Sarmag', 'laki-laki', 'JL.H.B Jassin No.337', 'sarmag@gmail.com', 'admin', '69005bb62e9622ee1de61958aacf0f63', '2022-01-13 11:51:05');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `akun`
+-- Indexes for table `akun`
 --
 ALTER TABLE `akun`
   ADD PRIMARY KEY (`no_reff`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `transaksi`
+-- Indexes for table `akun_temp`
+--
+ALTER TABLE `akun_temp`
+  ADD UNIQUE KEY `no_reff` (`no_reff`);
+
+--
+-- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
@@ -157,43 +275,64 @@ ALTER TABLE `transaksi`
   ADD KEY `no_reff` (`no_reff`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `transaksi_temp`
+--
+ALTER TABLE `transaksi_temp`
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `no_reff` (`no_reff`);
+
+--
+-- Indexes for table `unsur_laporan_keuangan`
+--
+ALTER TABLE `unsur_laporan_keuangan`
+  ADD PRIMARY KEY (`no_unsur`);
+
+--
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `transaksi`
+-- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `transaksi_temp`
+--
+ALTER TABLE `transaksi_temp`
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15168;
+--
+-- AUTO_INCREMENT for table `unsur_laporan_keuangan`
+--
+ALTER TABLE `unsur_laporan_keuangan`
+  MODIFY `no_unsur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Constraints for dumped tables
+--
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `akun`
+-- Constraints for table `akun`
 --
 ALTER TABLE `akun`
   ADD CONSTRAINT `akun_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
--- Ketidakleluasaan untuk tabel `transaksi`
+-- Constraints for table `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
