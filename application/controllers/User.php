@@ -200,17 +200,18 @@ class User extends CI_Controller{
         if($_POST){
             $data = (object) [
                 'id_user'=>$id_user,
-                'no_reff'=>$this->input->post('no_reff',true),
+                'no_reff'=>$this->input->post('no_reff[0]',true),
                 'tgl_input'=>$tgl_input,
                 'tgl_transaksi'=>$this->input->post('tgl_transaksi',true),
-                'jenis_saldo'=>$this->input->post('jenis_saldo',true),
-                'saldo'=>$this->input->post('saldo',true),
-                'keterangan'=>$this->input->post('keterangan',true)
+                'jenis_saldo'=>$this->input->post('jenis_saldo[0]',true),
+                'saldo'=>$this->input->post('saldo[0]',true),
+                'keterangan'=>$this->input->post('keterangan[0]',true)
             ];
             $id = $this->input->post('id',true);
         }
 
-        if(!$this->jurnal->validate()){
+
+        if(!$this->jurnal->validateJurnalCreation()){
             $this->load->view('template',compact('content','title','action','data','id','titleTag'));
             return;
         }
