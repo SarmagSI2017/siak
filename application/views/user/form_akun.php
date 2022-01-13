@@ -30,12 +30,17 @@
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label><h4><b>Unsur Akun</b></h4></label>
-                            <?php
-                              if ($title == 'Edit') {
-                                ?>
-                               <input type="text" name="unsur_laporan_keuangan" class="form-control mb-3" id="unsur_laporan_keuangan" value="" <?php if ($title == 'Edit') {
-                                                                                                                                  echo "readonly";
-                                                                                                                                }?>>
+                            <?php if ($title == 'Edit') { 
+                              $nama_unsur_o = '';
+                              foreach ($dataunsur as $row) :{
+                                if($data->unsur_laporan_keuangan == $row->no_unsur){
+                                  $nama_unsur_o = $row->nama_unsur;
+                                }
+                              }
+                              endforeach;
+                              ?>
+                               <input type="text" name="nama_unsur" class="form-control mb-3" id="nama_unsur" value="<?= $nama_unsur_o ?>" <?php if ($title == 'Edit') {echo "readonly";}?>>
+                               <input type="hidden" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" value="<?= $data->unsur_laporan_keuangan ?>" />
                             <?php
                              } else {
                               ?>
@@ -65,18 +70,14 @@
                         <p><?= form_error('no_reff') ?></p>
                         
                         <?php if($title == 'Edit'){ ?> 
-                          <input type="text" name="no_reff" class="form-control mb-3" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {
-                                                                                                                                  echo "readonly";
-                                                                                                                                }?>>
+                          <input type="text" name="no_reff" class="form-control mb-3" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {echo "readonly";}?>>
                         <?php } else { ?>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="basic-addon1"><div id="tempreff">1</div>-</span>
                               
                             </div>
-                            <input type="text" name="no_reff" class="form-control" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {
-                                                                                                                                    echo "readonly";
-                                                                                                                                  } ?>>
+                            <input type="text" name="no_reff" class="form-control" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {echo "readonly";} ?>>
                           </div>
                         <?php } ?>
                           
@@ -94,9 +95,7 @@
                             <label><h4><b>Saldo Normal</b></h4></label>
                             <?php
                               if ($title == 'Edit') { ?>
-                               <input type="text" name="unsur_laporan_keuangan" class="form-control mb-3" id="unsur_laporan_keuangan" value="<?= $data->saldo_normal ?>" <?php if ($title == 'Edit') {
-                                                                                                                                  echo "readonly";
-                                                                                                                                }?>>
+                               <input type="text" name="saldo_normal" class="form-control mb-3" id="saldo_normal" value="<?= $data->saldo_normal ?>" <?php if ($title == 'Edit') {echo "readonly";}?>>
                             <?php
                                } else {
                               ?>
