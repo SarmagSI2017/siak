@@ -30,6 +30,15 @@
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label><h4><b>Unsur Akun</b></h4></label>
+                            <?php
+                              if ($title == 'Edit') {
+                                ?>
+                               <input type="text" name="unsur_laporan_keuangan" class="form-control mb-3" id="unsur_laporan_keuangan" value="" <?php if ($title == 'Edit') {
+                                                                                                                                  echo "readonly";
+                                                                                                                                }?>>
+                            <?php
+                             } else {
+                              ?>
                             <select class="form-control" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?> >
                               <option disabled selected>-- Daftar Unsur Akun --</option>
                               <!-- <option value="<?= $data->no_reff ?>" ><?= $data->nama_reff ?></option> -->
@@ -42,6 +51,9 @@
                                   <option value="<?= $row->no_unsur ?>"><?= $row->nama_unsur ?></option>
                               <?php }
                               endforeach; ?>
+                              <?php
+                              }
+                              ?>
                             </select>
                           </div>
                         </div>
@@ -55,7 +67,7 @@
                         <?php if($title == 'Edit'){ ?> 
                           <input type="text" name="no_reff" class="form-control mb-3" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {
                                                                                                                                   echo "readonly";
-                                                                                                                                }?>
+                                                                                                                                }?>>
                         <?php } else { ?>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -64,7 +76,7 @@
                             </div>
                             <input type="text" name="no_reff" class="form-control" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {
                                                                                                                                     echo "readonly";
-                                                                                                                                  } ?>
+                                                                                                                                  } ?>>
                           </div>
                         <?php } ?>
                           
@@ -80,21 +92,17 @@
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label><h4><b>Saldo Normal</b></h4></label>
+                            <?php
+                              if ($title == 'Edit') { ?>
+                               <input type="text" name="unsur_laporan_keuangan" class="form-control mb-3" id="unsur_laporan_keuangan" value="<?= $data->saldo_normal ?>" <?php if ($title == 'Edit') {
+                                                                                                                                  echo "readonly";
+                                                                                                                                }?>>
+                            <?php
+                               } else {
+                              ?>
                             <p><?= form_error('is_atomic') ?></p>
                             <select class="form-control" name="saldo_normal" id="saldo_normal" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?>>
                               <option disabled selected>-- Pilih Saldo Normal --</option>
-                              <?php
-                              if ($title == 'Edit') {
-                              ?>
-                                <option <?php if ($data->saldo_normal == 'Debit') {
-                                          echo "selected";
-                                        } ?> value="Debit">Debit</option>
-                                <option <?php if ($data->saldo_normal == 'Kredit') {
-                                          echo "selected";
-                                        } ?> value="Kredit">Kredit</option>
-                              <?php
-                              } else {
-                              ?>
                                 <option value="Debit">Debit</option>
                                 <option value="Kredit">Kredit</option>
                               <?php
