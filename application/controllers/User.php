@@ -135,7 +135,7 @@ class User extends CI_Controller{
         $totalKredit = $this->jurnal->getTotalSaldoDetail('kredit',$bulan,$tahun);
 
         if($jurnals==null){
-            $this->session->set_flashdata('dataNull','Data Jurnal Dengan Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+            $this->session->set_flashdata('dataNull','Data Jurnal Dengan Bulan '.bulan($bulan).' Pada Tahun '.$tahun.' Tidak Di Temukan');
             redirect('jurnal_umum');
         }
 
@@ -257,7 +257,7 @@ class User extends CI_Controller{
         }
 
         if($data == null || $saldo == null){
-            $this->session->set_flashdata('dataNull','Data Buku Besar Dengan Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+            $this->session->set_flashdata('dataNull','Data Buku Besar Dengan Bulan '.bulan($bulan).' Pada Tahun '.$tahun.' Tidak Di Temukan');
             redirect('buku_besar');
         }
         $jumlah = count($data);
@@ -299,7 +299,7 @@ class User extends CI_Controller{
         }
 
         if($data == null || $saldo == null){
-            $this->session->set_flashdata('dataNull','Neraca Saldo Dengan Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+            $this->session->set_flashdata('dataNull','Neraca Saldo Dengan Bulan '.bulan($bulan).' Pada Tahun '.$tahun.' Tidak Di Temukan');
             redirect('neraca_saldo');
         }
 
@@ -335,7 +335,7 @@ class User extends CI_Controller{
         }
 
         if($data == null || $saldo == null){
-            $this->session->set_flashdata('dataNull','Laporan Dengan Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+            $this->session->set_flashdata('dataNull','Laporan Dengan Bulan '.bulan($bulan).' Pada Tahun '.$tahun.' Tidak Di Temukan');
             redirect('laporan');
         }
 
@@ -371,7 +371,7 @@ class User extends CI_Controller{
         
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
-		$titleTag = 'Laporan Posisi Keuangan  | '.bulan($bulan).' Tahun '.date('Y',strtotime($tahun));;
+		$titleTag = 'Laporan Posisi Keuangan  | '.bulan($bulan).' Tahun '.$tahun;
 
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_pk');
@@ -400,7 +400,7 @@ class User extends CI_Controller{
 		}
 
 		if($data == null || $saldo == null){
-			$this->session->set_flashdata('dataNull','Laporan Posisi Keuangan pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+			$this->session->set_flashdata('dataNull','Laporan Posisi Keuangan pada Bulan '.bulan($bulan).' Pada Tahun '.$tahun.' Tidak Di Temukan');
 			redirect('laporan_pk');
 		}
 
@@ -482,7 +482,7 @@ class User extends CI_Controller{
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
 
-		$titleTag = 'Laporan Komprehensif | '.bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+		$titleTag = 'Laporan Komprehensif | '.bulan($bulan).' Tahun '.$tahun;
         
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_kompre');
@@ -491,7 +491,7 @@ class User extends CI_Controller{
 		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
 		$data = null;
 		$saldo = null;
-        $periode= bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+        $periode= bulan($bulan).' Tahun '.$tahun;
 
         $kas = $this->jurnal->getLastMonthCash($bulan,$tahun); //jangan dihapus "i have no fuckin idea why deleting this shit causing SQL error"
 
@@ -506,7 +506,7 @@ class User extends CI_Controller{
         $jumlah = count($data);
 
 		if($data == null || $saldo == null){
-			$this->session->set_flashdata('dataNull','Laporan Laba Rugi pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+			$this->session->set_flashdata('dataNull','Laporan Laba Rugi pada Bulan '.bulan($bulan).' Pada Tahun '.$tahun.' Tidak Di Temukan');
 			redirect('laporan_kompre');
 		}
 
@@ -540,7 +540,7 @@ class User extends CI_Controller{
 		$bulan = $this->input->post('bulan',true);
 		$tahun = $this->input->post('tahun',true);
 
-		$titleTag = 'Laporan Aset Netto |'.bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+		$titleTag = 'Laporan Aset Netto |'.bulan($bulan).' Tahun '.$tahun;
 
 		if(empty($bulan) || empty($tahun)){
 			redirect('laporan_aset_netto');
@@ -549,7 +549,7 @@ class User extends CI_Controller{
 		$dataAkun = $this->akun->getAkunLRByMonthYear($bulan,$tahun);
 		$data = null;
 		$saldo = null;
-        $periode = bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+        $periode = bulan($bulan).' Tahun '.$tahun;
 
         $kas = $this->jurnal->getLastMonthCash($bulan,$tahun);    //jangan dihapus "i have no fuckin idea why deleting this shit causing SQL error"
 
@@ -569,7 +569,7 @@ class User extends CI_Controller{
         $jumlah = count($data);
 
 		if($data == null || $saldo == null){
-			$this->session->set_flashdata('dataNull','Laporan Aset Netto pada Bulan '.bulan($bulan).' Pada Tahun '.date('Y',strtotime($tahun)).' Tidak Di Temukan');
+			$this->session->set_flashdata('dataNull','Laporan Aset Netto pada Bulan '.bulan($bulan).' Pada Tahun '.$tahun.' Tidak Di Temukan');
 			redirect('laporan_aset_netto');
 		}
 
