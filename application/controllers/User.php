@@ -382,7 +382,7 @@ class User extends CI_Controller{
         $dataAN = null;
 		$saldo = null;
         $saldoAN = null;
-        $periode= bulan($bulan).' Tahun '.date('Y',strtotime($tahun));
+        $periode= bulan($bulan).' Tahun '.$tahun;
         $kas = $this->jurnal->getLastMonthCash($bulan,$tahun); //jangan dihapus "i have no fuckin idea why deleting this shit causing SQL error"
 
         $tanpaPembatasan =$this->jurnal->getLastNetoTanpaPembatasan($bulan,$tahun);

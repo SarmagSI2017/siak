@@ -108,20 +108,13 @@ class Akun_model extends CI_Model{
 	 * @return mixed
 	 */
 	public function getAkunPKByMonthYear($bulan,$tahun){
-		return $this->db->select('akun_temp.no_reff,akun_temp.nama_reff,akun_temp.keterangan,transaksi_temp.tgl_transaksi')
-			->from($this->table)
-			->where('month(transaksi_temp.tgl_transaksi)',$bulan)
-			->where('year(transaksi_temp.tgl_transaksi)',$tahun)
-			// ->where('transaksi_temp.no_reff<',400)
-            ->like('transaksi_temp.no_reff','1-')
-            ->or_like('transaksi_temp.no_reff','2-')
-            ->or_like('transaksi_temp.no_reff','3-')
-			->join('transaksi_temp','transaksi_temp.no_reff = akun_temp.no_reff')
-			->group_by('akun_temp.nama_reff')
-			->order_by('akun_temp.no_reff')
-			->get()
-			->result();
-	}
+        $query= "SELECT `akun_temp`.`no_reff`, `akun_temp`.`nama_reff`, `akun_temp`.`keterangan`, `transaksi_temp`.`tgl_transaksi` FROM `akun_temp` JOIN `transaksi_temp` ON `transaksi_temp`.`no_reff` = `akun_temp`.`no_reff` 
+        WHERE month(transaksi_temp.tgl_transaksi) = ".$bulan." AND year(transaksi_temp.tgl_transaksi) = ".$tahun." AND (akun_temp.no_reff LIKE '1-%' OR akun_temp.no_reff LIKE '2-%' OR akun_temp.no_reff LIKE '3-%')  
+        GROUP BY `akun_temp`.`nama_reff` ORDER BY `akun_temp`.`no_reff`";
+        return $this->db
+            ->query($query)
+            ->result();
+    }
 
     /*
 	 * Laporan Posisi Keuangan Section

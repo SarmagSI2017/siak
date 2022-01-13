@@ -78,9 +78,9 @@
 										for($j=0;$j<count($data[$i]);$j++):
 											if($deb[$j]->jenis_saldo=="debit") $hasil += $deb[$j]->saldo;
                                             else $hasil -= $deb[$j]->saldo;
-										endfor;
-										$totalAset += $hasil;
-									?>
+                                        endfor;
+                                        $totalAset += $hasil;
+                                        ?>
                                     <td>
                                         <!-- <?= $data[$i][$s]->no_reff ?> -->
                                     </td>
@@ -88,7 +88,7 @@
                                     <td><?= $data[$i][$s]->keterangan ?></td>
                                 </tr>
                                 <?php } ?>
-                                <?php endfor ; $hasil = 0;?>
+                                <?php $hasil = 0; endfor ; ?>
                                 <tr style="background-color:aquamarine;">
                                     <td><b>Total Aset</b></td>
                                     <td></td>
@@ -114,9 +114,10 @@
                                 <tr>
                                     <td>
                                         <!-- <?= $data[$i][$s]->no_reff ?> -->
+                                        <?= $data[$i][$s]->nama_reff ?>
                                     </td>
                                     <td>
-                                        <?= $data[$i][$s]->nama_reff ?>
+                                        <!-- <?= $data[$i][$s]->nama_reff ?> -->
                                     </td>
                                     <?php
 										for($j=0;$j<count($data[$i]);$j++):
@@ -130,7 +131,7 @@
                                     <td></td>
                                 </tr>
                                 <?php } ?>
-                                <?php endfor ?>
+                                <?php $hasil = 0; endfor; ?>
                                 <tr style="background-color:aquamarine;">
                                     <td><b>Total Liabilitas</b></td>
                                     <td></td>
