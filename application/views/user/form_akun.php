@@ -30,7 +30,7 @@
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label><h4><b>Unsur Akun</b></h4></label>
-                            <select class="form-control" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" onchange="addData()" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?> >
+                            <select class="form-control" name="unsur_laporan_keuangan" id="unsur_laporan_keuangan" required="required" <?php if ($title == 'Edit') { echo "readonly";} ?> >
                               <option disabled selected>-- Daftar Unsur Akun --</option>
                               <!-- <option value="<?= $data->no_reff ?>" ><?= $data->nama_reff ?></option> -->
                               <?php
@@ -51,9 +51,23 @@
                           <h4><b>No. Reff</b></h4>
                         </label>
                         <p><?= form_error('no_reff') ?></p>
-                        <input type="text" name="no_reff" class="form-control mb-3" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {
+                        
+                        <?php if($title == 'Edit'){ ?> 
+                          <input type="text" name="no_reff" class="form-control mb-3" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {
                                                                                                                                   echo "readonly";
-                                                                                                                                } ?>>
+                                                                                                                                }?>
+                        <?php } else { ?>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1"><div id="tempreff">1</div>-</span>
+                              
+                            </div>
+                            <input type="text" name="no_reff" class="form-control" id="no_reff" value="<?= $data->no_reff ?>" <?php if ($title == 'Edit') {
+                                                                                                                                    echo "readonly";
+                                                                                                                                  } ?>
+                          </div>
+                        <?php } ?>
+                          
                       </div>
                       <div class="form-group">
                         <label for="nama">

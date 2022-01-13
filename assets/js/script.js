@@ -119,6 +119,11 @@ $(document).ready(function () {
 			$( ".reff" ).eq(index).val($(this).val());
 		});
 
+	$(document).on("change", "#unsur_laporan_keuangan", function()  {
+		let index = $( "#unsur_laporan_keuangan" ).val();
+		console.log(index)
+			document.getElementById("tempreff").innerHTML = index;
+		});
 
 
 	$(window).on('load', function () {

@@ -70,7 +70,7 @@
                           </div>  
                           <div class="col">
                             <label for="reff">No. Reff</label>
-                            <input type="text" name="reff[]" class="form-control reff" id="" readonly>
+                            <input type="text" name="reff[]" class="form-control reff" id="" value="<?php if($title == "Edit") echo $data->no_reff ?>" readonly>
                           </div>
                           <div class="col">
                             <label for="jenis_saldo">Jenis Saldo</label>
