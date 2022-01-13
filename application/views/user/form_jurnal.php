@@ -112,7 +112,7 @@
                         <div class="row mb-4">
                           <div class="col">
                             <label for="no_reff">Nama Akun</label>
-                            <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff']), $data->no_reff, ['class' => 'form-control no_reff', 'id' => '']); ?>
+                            <?= form_dropdown('no_reff[]', getDropdownList('akun_temp', ['no_reff', 'nama_reff'], 'is_atomic', '1'), $data->no_reff, ['class' => 'form-control no_reff', 'id' => '']); ?>
                             <?= form_error('no_reff') ?>
                           </div>
                           <div class="col">

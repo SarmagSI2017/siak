@@ -52,7 +52,7 @@ class Akun extends CI_Controller
 
     $namaAkun = $this->akun->countAkunByNama($str);
     $similarAkun = $this->akun->getAkunByNo($this->input->post('no_reff'));
-    if ($namaAkun >= 1) {
+    if ($namaAkun >= 1 and strtolower($similarAkun->nama_reff) != strtolower($str)) {
       $this->form_validation->set_message('isNamaAkunThere', 'Nama Akun Sudah Ada');
       return false;
     }
